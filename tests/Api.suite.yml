@@ -1,0 +1,14 @@
+# API Testing
+actor: ApiTester
+modules:
+  enabled:
+    - Symfony:
+        app_path: 'src'
+        environment: 'test'
+    - REST:
+        url: /api
+        depends: Symfony
+        part: Json
+    - Doctrine2:
+        depends: Symfony
+    - \App\Tests\Helper\Api

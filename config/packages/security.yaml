@@ -1,0 +1,20 @@
+security:
+    encoders:
+        App\Entity\User: bcrypt
+    providers:
+        app_user_provider:
+            entity: { class: App\Entity\User, property: email }
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\SecurityAuthenticator
+            logout:
+                path: app_logout
+    access_control:
+        - { path: '^/dashboard', roles: ROLE_USER }

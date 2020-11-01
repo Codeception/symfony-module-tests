@@ -1,0 +1,28 @@
+parameters:
+    locale: 'es'
+    app.business_shortname: '%env(BUSINESS_SHORTNAME)%'
+    app.business_fullname: '%env(BUSINESS_FULLNAME)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    security.helper:
+        class: Symfony\Component\Security\Core\Security
+        public: true
+
+    security.user_password_encoder.generic:
+        class: Symfony\Component\Security\Core\Encoder\UserPasswordEncoder
+        public: true
+
+    App\Repository\Model\UserRepositoryInterface: '@App\Repository\UserRepository'

@@ -1,0 +1,7 @@
+twig:
+    default_path: '%kernel.project_dir%/resources/views'
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    globals:
+        business_shortname: '%app.business_shortname%'
+        usiness_fullname: '%app.business_fullname%'

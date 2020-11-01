@@ -1,0 +1,17 @@
+# Framework Testing
+actor: FunctionalTester
+modules:
+    enabled:
+        - Asserts
+        - Symfony:
+            app_path: 'src'
+            environment: 'test'
+            mailer: 'symfony_mailer'
+        - REST:
+            url: /api
+            depends: Symfony
+            part: Json
+        - Doctrine2:
+            depends: Symfony
+            cleanup: true
+        - \App\Tests\Helper\Functional

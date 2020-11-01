@@ -1,0 +1,25 @@
+parameters:
+    locale: 'es'
+    app.business_shortname: '%env(BUSINESS_SHORTNAME)%'
+    app.business_fullname: '%env(BUSINESS_FULLNAME)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']
+
+    App\Doctrine\UserHashPasswordListener:
+        tags:
+            - { name: doctrine.orm.entity_listener, lazy: true }

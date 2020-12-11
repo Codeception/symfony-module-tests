@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Repository\Model\UserRepositoryInterface;
 use App\Repository\UserRepository;
 use App\Tests\FunctionalTester;
+use Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener;
 use Symfony\Component\Security\Core\Security;
 
 final class SymfonyModuleCest
@@ -62,6 +63,24 @@ final class SymfonyModuleCest
             '[agreeTerms]' => true
         ]);
         $I->dontSeeFormErrors();
+    }
+
+    public function dontSeeInSession(FunctionalTester $I)
+    {
+        $I->amOnPage('/');
+        $I->dontSeeInSession('_security_main');
+    }
+
+    public function dontSeeRememberedAuthentication(FunctionalTester $I)
+    {
+        $I->amOnPage('/dashboard');
+        $I->dontSeeRememberedAuthentication();
+    }
+
+    public function grabNumRecords(FunctionalTester $I)
+    {
+        $numRecords = $I->grabNumRecords(User::class);
+        $I->assertSame(1, $numRecords);
     }
 
     public function grabParameter(FunctionalTester $I)
@@ -154,6 +173,12 @@ final class SymfonyModuleCest
         $I->seeEmailIsSent();
     }
 
+    public function seeEventTriggered(FunctionalTester $I)
+    {
+        $I->amOnPage('/');
+        $I->seeEventTriggered(SecurityListener::class);
+    }
+
     public function seeFormErrorMessage(FunctionalTester $I)
     {
         $I->amOnPage('/register');
@@ -209,6 +234,28 @@ final class SymfonyModuleCest
     public function seePageRedirectsTo(FunctionalTester $I)
     {
         $I->seePageRedirectsTo('/dashboard', '/login');
+    }
+
+    public function seeRememberedAuthentication(FunctionalTester $I)
+    {
+        $I->amOnPage('/login');
+        $I->submitForm('form[name=login]', [
+            'email' => 'john_doe@gmail.com',
+            'password' => '123456',
+            '_remember_me' => true
+        ]);
+        $I->seeRememberedAuthentication();
+    }
+
+    public function seeSessionHasValues(FunctionalTester $I)
+    {
+        $user = $I->grabEntityFromRepository(User::class, [
+            'email' => 'john_doe@gmail.com'
+        ]);
+        $I->amLoggedInAs($user);
+        $I->amOnPage('/');
+
+        $I->seeSessionHasValues(['_security_main', '_security_main']);
     }
 
     public function seeUserHasRole(FunctionalTester $I)

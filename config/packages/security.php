@@ -39,6 +39,9 @@ return static function (ContainerConfigurator $configurator): void
                 ],
                 'logout' => [
                     'path' => 'app_logout'
+                ],
+                'remember_me' => [
+                    'secret' => '%env(APP_SECRET)%'
                 ]
             ]
         ]

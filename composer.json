@@ -35,7 +35,7 @@
         "codeception/module-doctrine2": "^1.1",
         "codeception/module-phpbrowser": "^1.0",
         "codeception/module-rest": "^1.2",
-        "codeception/module-symfony": "^1.4",
+        "codeception/module-symfony": "^1.5",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "friendsofphp/php-cs-fixer": "^2.16",
         "phpmd/phpmd": "^2.9",

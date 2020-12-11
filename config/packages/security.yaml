@@ -16,5 +16,7 @@ security:
                     - App\Security\SecurityAuthenticator
             logout:
                 path: app_logout
+            remember_me:
+                secret: '%env(APP_SECRET)%'
     access_control:
         - { path: '^/dashboard', roles: ROLE_USER }

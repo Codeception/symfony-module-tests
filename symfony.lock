@@ -260,7 +260,7 @@
         "version": "2.1.2"
     },
     "phpunit/php-token-stream": {
-        "version": "3.1.1"
+        "version": "3.1.2"
     },
     "phpunit/phpunit": {
         "version": "4.7",

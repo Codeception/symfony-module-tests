@@ -25,7 +25,7 @@ Minimal site containing functional tests for [Codeception Module Symfony](https:
    ```sh
    symfony console d:s:u -f
    
-   symfony console d:f:l -q
+   php bin/console doctrine:fixtures:load --quiet
    ```
 ### Usage
    ```sh

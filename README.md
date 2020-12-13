@@ -23,7 +23,7 @@ Minimal site containing functional tests for [Codeception Module Symfony](https:
    ```
 4. Update database schema and load Doctrine fixtures
    ```sh
-   symfony console d:s:u -f
+   php bin/console doctrine:schema:update --force
    
    php bin/console doctrine:fixtures:load --quiet
    ```

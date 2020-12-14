@@ -26,7 +26,6 @@
         "symfony/security-bundle": "3.4.*",
         "symfony/translation": "3.4.*",
         "symfony/validator": "3.4.*",
-        "symfony/webpack-encore-bundle": "^1.8",
         "symfony/yaml": "3.4.*"
     },
     "require-dev": {

@@ -4,32 +4,30 @@ Minimal site containing functional tests for [Codeception Module Symfony](https:
 ### Installation
 
 1. Clone the repo
-   ```sh
-   git clone https://github.com/TavoNiievez/codeception-symfony-tests.git
+   ```shell
+   git clone https://github.com/Codeception/symfony-module-tests.git
    ```
 2. Install Composer dependencies
-   ```sh
-   # PHP ^7.0
+   ```shell
+   # PHP ^7.1
    composer update
    
    # PHP ^8.0
    composer update --ignore-platform-req=php
    ```
 3. Install Yarn packages and compile the assets
-   ```sh
+   ```shell
    yarn install
    
    yarn encore dev
    ```
 4. Update database schema and load Doctrine fixtures
-   ```sh
-   symfony console d:s:u -f
+   ```shell
+   php bin/console doctrine:schema:update --force
    
-   symfony console d:f:l -q
+   php bin/console doctrine:fixtures:load --quiet
    ```
 ### Usage
-   ```sh
-   symfony serve -d
-   
+   ```shell
    vendor/bin/codecept run Functional
    ```

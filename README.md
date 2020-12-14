@@ -11,13 +11,7 @@ Minimal site containing functional tests for [Codeception Module Symfony](https:
    ```shell
    composer install
    ```
-3. Install Yarn packages and compile the assets
-   ```shell
-   yarn install
-   
-   yarn encore dev
-   ```
-4. Update database schema and load Doctrine fixtures
+3. Update database schema and load Doctrine fixtures
    ```shell
    php bin/console doctrine:schema:update --force
    

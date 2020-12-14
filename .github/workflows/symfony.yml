@@ -28,15 +28,6 @@ jobs:
         env:
           update: true
 
-      - name: Yarn install
-        uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: install
-      - name: Yarn build
-        uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: run encore production
-
       - name: Validate composer.json
         run: composer validate
 

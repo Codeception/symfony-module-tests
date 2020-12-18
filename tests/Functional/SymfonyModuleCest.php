@@ -116,8 +116,23 @@ final class SymfonyModuleCest
 
     public function runSymfonyConsoleCommand(FunctionalTester $I)
     {
+        // Call Symfony console without option
         $output = $I->runSymfonyConsoleCommand(ExampleCommand::getDefaultName());
         $I->assertStringContainsString('Hello world!', $output);
+
+        // Call Symfony console with short option
+        $output = $I->runSymfonyConsoleCommand(
+            ExampleCommand::getDefaultName(),
+            ['-s' => true]
+        );
+        $I->assertStringContainsString('Bye world!', $output);
+
+        // Call Symfony console with long option
+        $output = $I->runSymfonyConsoleCommand(
+            ExampleCommand::getDefaultName(),
+            ['--something' => true]
+        );
+        $I->assertStringContainsString('Bye world!', $output);
     }
 
     public function seeAuthentication(FunctionalTester $I)

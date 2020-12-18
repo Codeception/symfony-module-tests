@@ -15,6 +15,7 @@ final class UserFixture extends Fixture
         $user = new User();
         $user->setEmail('john_doe@gmail.com');
         $user->setPassword('123456');
+        $user->setRoles(['ROLE_CUSTOMER']);
         $manager->persist($user);
         $manager->flush();
     }

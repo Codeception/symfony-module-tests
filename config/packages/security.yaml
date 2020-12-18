@@ -18,5 +18,6 @@ security:
                 path: app_logout
             remember_me:
                 secret: '%env(APP_SECRET)%'
+            logout_on_user_change: true
     access_control:
         - { path: '^/dashboard', roles: ROLE_USER }

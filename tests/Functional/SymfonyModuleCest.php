@@ -10,6 +10,8 @@ use App\Repository\Model\UserRepositoryInterface;
 use App\Repository\UserRepository;
 use App\Tests\FunctionalTester;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener;
+use Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector;
+use Symfony\Component\Console\EventListener\ErrorListener;
 use Symfony\Component\Security\Core\Security;
 
 final class SymfonyModuleCest
@@ -42,6 +44,14 @@ final class SymfonyModuleCest
         $I->dontSeeAuthentication();
     }
 
+    public function dontSeeEventTriggered(FunctionalTester $I)
+    {
+        $I->amOnPage('/');
+        $I->dontSeeEventTriggered(ErrorListener::class);
+        $I->dontSeeEventTriggered(new ErrorListener());
+        $I->dontSeeEventTriggered([ErrorListener::class, ErrorListener::class]);
+    }
+
     public function dontSeeFormErrors(FunctionalTester $I)
     {
         $I->amOnPage('/register');
@@ -61,7 +71,12 @@ final class SymfonyModuleCest
 
     public function dontSeeRememberedAuthentication(FunctionalTester $I)
     {
-        $I->amOnPage('/dashboard');
+        $I->amOnPage('/login');
+        $I->submitForm('form[name=login]', [
+            'email' => 'john_doe@gmail.com',
+            'password' => '123456',
+            '_remember_me' => false
+        ]);
         $I->dontSeeRememberedAuthentication();
     }
 
@@ -162,12 +177,13 @@ final class SymfonyModuleCest
     {
         $I->amOnPage('/');
         $I->seeEventTriggered(SecurityListener::class);
+        $I->seeEventTriggered(new RouterDataCollector());
+        $I->seeEventTriggered([SecurityListener::class, RouterDataCollector::class]);
     }
 
     public function seeFormErrorMessage(FunctionalTester $I)
     {
         $I->amOnPage('/register');
-        $I->stopFollowingRedirects();
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'john_doe@gmail.com',
             '[plainPassword]' => '123456',
@@ -175,6 +191,27 @@ final class SymfonyModuleCest
         ]);
         $I->seeFormErrorMessage('email');
         $I->seeFormErrorMessage('email', 'There is already an account with this email');
+    }
+
+    public function seeFormErrorMessages(FunctionalTester $I)
+    {
+        $I->amOnPage('/register');
+        $I->submitSymfonyForm('registration_form', [
+            '[email]' => 'john_doe@gmail.com',
+            '[plainPassword]' => '123',
+            '[agreeTerms]' => true
+        ]);
+
+        // Only with the names of the fields
+        $I->seeFormErrorMessages(['email', 'plainPassword']);
+
+        // With field names and error messages
+        $I->seeFormErrorMessages([
+            // Full Message
+            'email' => 'There is already an account with this email',
+            // Part of a message
+            'plainPassword' => 'at least 6 characters'
+        ]);
     }
 
     public function seeFormHasErrors(FunctionalTester $I)
@@ -252,6 +289,17 @@ final class SymfonyModuleCest
         $I->amOnPage('/');
 
         $I->seeUserHasRole('ROLE_USER');
+    }
+
+    public function seeUserHasRoles(FunctionalTester $I)
+    {
+        $user = $I->grabEntityFromRepository(User::class, [
+            'email' => 'john_doe@gmail.com'
+        ]);
+        $I->amLoggedInAs($user);
+        $I->amOnPage('/');
+
+        $I->seeUserHasRoles(['ROLE_USER', 'ROLE_CUSTOMER']);
     }
 
     public function submitSymfonyForm(FunctionalTester $I)

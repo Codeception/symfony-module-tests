@@ -25,6 +25,7 @@ final class UserFixture extends Fixture
         $user->setPassword(
             $this->encoder->encodePassword($user, '123456')
         );
+        $user->setRoles(['ROLE_CUSTOMER']);
         $manager->persist($user);
         $manager->flush();
     }

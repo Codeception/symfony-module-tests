@@ -1,7 +1,7 @@
 # Codeception Symfony Module Tests
 Minimal site containing functional tests for [Codeception Module Symfony](https://github.com/Codeception/module-symfony).
 
-### Installation
+## Installation
 
 1. Clone the repo
    ```shell
@@ -21,8 +21,17 @@ Minimal site containing functional tests for [Codeception Module Symfony](https:
    
    php bin/console doctrine:fixtures:load --quiet
    ```
-### Usage
-   ```shell
-   vendor/bin/codecept run Functional
-   ```
 
+## Usage
+
+```shell
+vendor/bin/codecept run Functional
+```
+
+## Create Unit Suite or Acceptance Suite
+
+To create [Unit Tests](https://codeception.com/docs/05-UnitTests) or [Acceptance Tests](https://codeception.com/docs/03-AcceptanceTests), you need to create the corresponding suite first:
+```shell
+vendor/bin/codecept g:suite unit
+vendor/bin/codecept g:suite acceptance
+```

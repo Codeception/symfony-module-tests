@@ -17,7 +17,7 @@ jobs:
         php-versions: ['7.3', '7.4', '8.0']
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2
 
       - name: Setup PHP with extensions and Composer v2
         uses: shivammathur/setup-php@v2
@@ -43,22 +43,14 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ matrix.php-versions }}-composer-
 
       - name: Install Composer dependencies
-        if: matrix.php-versions < 8
         run: composer update --no-progress
 
-      - name: Install Composer dependencies
-        if: matrix.php-versions == 8.0
-        run: composer update --no-progress --ignore-platform-req=php
-
-      - name: Download Symfony CLI
-        run: wget https://get.symfony.com/cli/installer -O - | bash
-
       - name: Update database schema
-        run: /home/runner/.symfony/bin/symfony console d:s:u -f
+        run: php bin/console d:s:u -f
 
       - name: Load Doctrine fixtures
-        run: /home/runner/.symfony/bin/symfony console d:f:l -q
+        run: php bin/console d:f:l -q
 
-      - name: Run functionnal tests
+      - name: Run functional tests
         run: |
           vendor/bin/codecept run Functional

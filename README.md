@@ -9,11 +9,7 @@ Minimal site containing functional tests for [Codeception Module Symfony](https:
    ```
 2. Install Composer dependencies
    ```shell
-   # PHP ^7.3
    composer update
-   
-   # PHP ^8.0
-   composer update --ignore-platform-req=php
    ```
 3. Update database schema and load Doctrine fixtures
    ```shell

@@ -9,7 +9,7 @@ Minimal site containing functional tests for [Codeception Module Symfony](https:
    ```
 2. Install Composer dependencies
    ```shell
-   composer install
+   composer update
    ```
 3. Update database schema and load Doctrine fixtures
    ```shell

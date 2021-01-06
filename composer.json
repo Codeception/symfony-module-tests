@@ -96,6 +96,10 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "post-create-project-cmd": [
+            "@php bin/console doctrine:schema:update --force",
+            "@php bin/console doctrine:fixtures:load --quiet"
         ]
     },
     "conflict": {

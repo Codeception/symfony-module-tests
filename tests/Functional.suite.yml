@@ -7,10 +7,6 @@ modules:
             app_path: 'src'
             environment: 'test'
             mailer: 'symfony_mailer'
-        - REST:
-            url: /api
-            depends: Symfony
-            part: Json
         - Doctrine2:
             depends: Symfony
             cleanup: true

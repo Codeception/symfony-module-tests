@@ -32,9 +32,6 @@
     "codeception/module-phpbrowser": {
         "version": "1.0.2"
     },
-    "codeception/module-rest": {
-        "version": "1.2.7"
-    },
     "codeception/module-symfony": {
         "version": "1.4.2"
     },
@@ -163,9 +160,6 @@
     },
     "jean85/pretty-package-versions": {
         "version": "2.0.2"
-    },
-    "justinrainbow/json-schema": {
-        "version": "5.2.10"
     },
     "monolog/monolog": {
         "version": "2.1.1"
@@ -351,9 +345,6 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
-    },
-    "softcreatr/jsonpath": {
-        "version": "0.7.2"
     },
     "squizlabs/php_codesniffer": {
         "version": "3.0",

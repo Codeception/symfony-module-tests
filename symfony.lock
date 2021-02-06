@@ -162,16 +162,10 @@
         "version": "1.7.0"
     },
     "jean85/pretty-package-versions": {
-        "version": "1.5.1"
+        "version": "2.0.2"
     },
     "justinrainbow/json-schema": {
         "version": "5.2.10"
-    },
-    "migrify/migrify-kernel": {
-        "version": "0.4.2"
-    },
-    "migrify/php-config-printer": {
-        "version": "0.4.2"
     },
     "monolog/monolog": {
         "version": "2.1.1"
@@ -185,17 +179,17 @@
     "nette/finder": {
         "version": "v2.5.2"
     },
+    "nette/neon": {
+        "version": "v3.2.1"
+    },
     "nette/robot-loader": {
         "version": "v3.3.1"
     },
     "nette/utils": {
-        "version": "v3.2.0"
+        "version": "v3.2.1"
     },
     "nikic/php-parser": {
         "version": "v4.10.2"
-    },
-    "ondram/ci-detector": {
-        "version": "3.5.1"
     },
     "openlss/lib-array2xml": {
         "version": "1.0.0"
@@ -228,13 +222,13 @@
         "version": "1.12.1"
     },
     "phpstan/phpdoc-parser": {
-        "version": "0.4.9"
+        "version": "0.4.10"
     },
     "phpstan/phpstan": {
-        "version": "0.12.57"
+        "version": "0.12.69"
     },
     "phpstan/phpstan-phpunit": {
-        "version": "0.12.16"
+        "version": "0.12.17"
     },
     "phpunit/php-code-coverage": {
         "version": "9.2.4"
@@ -293,7 +287,7 @@
         "version": "3.0.3"
     },
     "rector/rector": {
-        "version": "0.8.56"
+        "version": "0.9.18"
     },
     "roave/security-advisories": {
         "version": "dev-latest"
@@ -356,18 +350,6 @@
         },
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
-        ]
-    },
-    "sensiolabs/security-checker": {
-        "version": "4.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "4.0",
-            "ref": "160c9b600564faa1224e8f387d49ef13ceb8b793"
-        },
-        "files": [
-            "./config/packages/security_checker.yaml"
         ]
     },
     "softcreatr/jsonpath": {
@@ -457,6 +439,9 @@
     "symfony/event-dispatcher-contracts": {
         "version": "v2.2.0"
     },
+    "symfony/expression-language": {
+        "version": "v5.2.3"
+    },
     "symfony/filesystem": {
         "version": "v5.1.8"
     },
@@ -497,9 +482,6 @@
             "./src/Controller/.gitignore",
             "./src/Kernel.php"
         ]
-    },
-    "symfony/http-client": {
-        "version": "v5.1.8"
     },
     "symfony/http-client-contracts": {
         "version": "v2.3.1"
@@ -723,29 +705,53 @@
     "symfony/yaml": {
         "version": "v5.1.8"
     },
+    "symplify/astral": {
+        "version": "9.1.0"
+    },
     "symplify/autowire-array-parameter": {
-        "version": "8.3.48"
+        "version": "9.1.0"
     },
     "symplify/composer-json-manipulator": {
-        "version": "8.3.48"
+        "version": "9.1.0"
     },
     "symplify/console-color-diff": {
-        "version": "8.3.48"
+        "version": "9.1.0"
+    },
+    "symplify/console-package-builder": {
+        "version": "9.1.0"
     },
     "symplify/easy-testing": {
-        "version": "8.3.48"
+        "version": "9.1.0"
+    },
+    "symplify/markdown-diff": {
+        "version": "9.1.0"
     },
     "symplify/package-builder": {
-        "version": "8.3.48"
+        "version": "9.1.0"
+    },
+    "symplify/php-config-printer": {
+        "version": "9.1.0"
+    },
+    "symplify/rule-doc-generator": {
+        "version": "9.1.0"
     },
     "symplify/set-config-resolver": {
-        "version": "8.3.48"
+        "version": "9.1.0"
+    },
+    "symplify/simple-php-doc-parser": {
+        "version": "9.1.0"
+    },
+    "symplify/skipper": {
+        "version": "9.1.0"
     },
     "symplify/smart-file-system": {
-        "version": "8.3.48"
+        "version": "9.1.0"
+    },
+    "symplify/symfony-php-config": {
+        "version": "9.1.0"
     },
     "symplify/symplify-kernel": {
-        "version": "8.3.48"
+        "version": "9.1.0"
     },
     "theseer/tokenizer": {
         "version": "1.2.0"
@@ -761,6 +767,9 @@
     },
     "webmozart/path-util": {
         "version": "2.3.0"
+    },
+    "zenstruck/callback": {
+        "version": "v1.2.0"
     },
     "zenstruck/foundry": {
         "version": "v1.5.0"

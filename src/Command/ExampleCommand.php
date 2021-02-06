@@ -12,14 +12,18 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class ExampleCommand extends Command
 {
+    /** @var string */
     private const OPTION_SOMETHING = 'something';
+    /** @var string */
     private const OPTION_SHORT_SOMETHING = 's';
 
+    /** @var SymfonyStyle */
     private $ioStream;
 
+    /** @var string */
     protected static $defaultName = 'app:example-command';
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setDescription('An example command.');
 
@@ -38,7 +42,8 @@ final class ExampleCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        if ($input->getOption(self::OPTION_SOMETHING)) {
+        $optionSomething = $input->getOption(self::OPTION_SOMETHING);
+        if ($optionSomething) {
             $this->ioStream->text('Bye world!');
         } else {
             $this->ioStream->text('Hello world!');

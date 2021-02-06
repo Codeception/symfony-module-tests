@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Security;
 
-use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\Model\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -25,33 +25,45 @@ final class SecurityAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
+    /** @var string */
     public const LOGIN_ROUTE = 'app_login';
 
-    private $entityManager;
+    /** @var UrlGeneratorInterface */
     private $urlGenerator;
+
+    /** @var CsrfTokenManagerInterface */
     private $csrfTokenManager;
+
+    /** @var UserPasswordEncoderInterface */
     private $passwordEncoder;
+
+    /** @var Security */
     private $security;
 
+    /** @var UserRepositoryInterface */
+    private $userRepository;
+
     public function __construct(
-        EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordEncoderInterface $passwordEncoder,
+        UserPasswordEncoderInterface $userPasswordEncoder,
+        UserRepositoryInterface $userRepository,
         Security $security
     )
     {
-        $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
-        $this->passwordEncoder = $passwordEncoder;
+        $this->passwordEncoder = $userPasswordEncoder;
         $this->security = $security;
+        $this->userRepository = $userRepository;
     }
 
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
-        return self::LOGIN_ROUTE === $request->attributes->get('_route')
-            && $request->isMethod('POST');
+        if (self::LOGIN_ROUTE !== $request->attributes->get('_route')) {
+            return false;
+        }
+        return $request->isMethod('POST');
     }
 
     public function getCredentials(Request $request)
@@ -69,28 +81,28 @@ final class SecurityAuthenticator extends AbstractFormLoginAuthenticator
         return $credentials;
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface
     {
-        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
-        if (!$this->csrfTokenManager->isTokenValid($token)) {
+        $csrfToken = new CsrfToken('authenticate', $credentials['csrf_token']);
+        if (!$this->csrfTokenManager->isTokenValid($csrfToken)) {
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
+        $user = $this->userRepository->getByEmail($credentials['email']);
 
-        if (!$user) {
+        if ($user === null) {
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
         return $user;
     }
 
-    public function checkCredentials($credentials, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
@@ -99,7 +111,7 @@ final class SecurityAuthenticator extends AbstractFormLoginAuthenticator
         return new RedirectResponse($this->urlGenerator->generate('dashboard'));
     }
 
-    protected function getLoginUrl()
+    protected function getLoginUrl(): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }

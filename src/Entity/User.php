@@ -20,22 +20,25 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @var int|null
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @var string
      */
     private $email = '';
 
     /**
      * @ORM\Column(type="json")
+     * @var array
      */
     private $roles = [];
 
     /**
-     * @var string The hashed password
      * @ORM\Column(type="string")
+     * @var string
      */
     private $password = '';
 
@@ -44,7 +47,7 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -61,6 +64,9 @@ class User implements UserInterface
         return $this->email;
     }
 
+    /**
+     * @return string[]
+     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -89,11 +95,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getSalt()
+    public function getSalt(): ?string
     {
+        return null;
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
     }
 }

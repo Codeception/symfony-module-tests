@@ -6,35 +6,37 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\Model\UserRepositoryInterface;
 use App\Utils\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class RegistrationController extends AbstractController
 {
+    /** @var Mailer */
     private $mailer;
 
-    public function __construct(Mailer $mailer)
+    /** @var UserRepositoryInterface */
+    private $userRepository;
+
+    public function __construct(Mailer $mailer, UserRepositoryInterface $userRepository)
     {
         $this->mailer = $mailer;
+        $this->userRepository = $userRepository;
     }
 
-    public function __invoke(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function __invoke(Request $request): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $form->get('plainPassword')->getData()
-            );
+            $plainPassword = $form->get('plainPassword')->getData();
+            $user->setPassword($plainPassword);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->userRepository->save($user);
 
             $this->mailer->sendConfirmationEmail($user);
 

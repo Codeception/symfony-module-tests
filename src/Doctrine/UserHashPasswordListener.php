@@ -9,14 +9,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class UserHashPasswordListener
 {
+    /** @var UserPasswordEncoderInterface */
     private $encoder;
 
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(UserPasswordEncoderInterface $userPasswordEncoder)
     {
-        $this->encoder = $encoder;
+        $this->encoder = $userPasswordEncoder;
     }
 
-    public function prePersist(User $user)
+    public function prePersist(User $user): void
     {
         if (!$this->encoder->needsRehash($user)) {
             return;

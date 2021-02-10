@@ -11,7 +11,12 @@ final class BrowserCest
 {
     public function seePageIsAvailable(FunctionalTester $I)
     {
-        $I->seePageIsAvailable('/');
+        // With url parameter
+        $I->seePageIsAvailable('/login');
+
+        // Without url parameter
+        $I->amOnPage('/register');
+        $I->seePageIsAvailable();
     }
 
     public function seePageRedirectsTo(FunctionalTester $I)

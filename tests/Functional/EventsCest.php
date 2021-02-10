@@ -19,11 +19,34 @@ final class EventsCest
         $I->dontSeeEventTriggered([ErrorListener::class, ErrorListener::class]);
     }
 
+    public function dontSeeOrphanEvent(FunctionalTester $I)
+    {
+        $I->amOnPage('/login');
+        $I->submitForm('form[name=login]', [
+            'email' => 'john_doe@gmail.com',
+            'password' => '123456',
+            '_remember_me' => false
+        ]);
+        $I->dontseeOrphanEvent();
+        $I->dontSeeOrphanEvent('security.authentication.success');
+    }
+
     public function seeEventTriggered(FunctionalTester $I)
     {
         $I->amOnPage('/');
         $I->seeEventTriggered(SecurityListener::class);
         $I->seeEventTriggered(new RouterDataCollector());
         $I->seeEventTriggered([SecurityListener::class, RouterDataCollector::class]);
+    }
+
+    public function seeOrphanEvent(FunctionalTester $I)
+    {
+        $I->amOnPage('/register');
+        $I->submitSymfonyForm('registration_form', [
+            '[email]' => 'jane_doe@gmail.com',
+            '[plainPassword]' => '123456',
+            '[agreeTerms]' => true
+        ]);
+        $I->seeOrphanEvent('security.authentication.success');
     }
 }

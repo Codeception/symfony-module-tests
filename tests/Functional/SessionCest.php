@@ -6,6 +6,7 @@ namespace App\Tests\Functional;
 
 use App\Entity\User;
 use App\Tests\FunctionalTester;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 final class SessionCest
 {
@@ -16,6 +17,10 @@ final class SessionCest
         ]);
         $I->amLoggedInAs($user);
         $I->amOnPage('/dashboard');
+        $I->seeAuthentication();
+        /** @var TokenStorageInterface $tokenStorage */
+        $tokenStorage = $I->grabService('security.token_storage');
+        $I->assertNotNull($tokenStorage->getToken());
         $I->see('You are in the Dashboard!');
     }
 

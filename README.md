@@ -44,3 +44,29 @@ To create [Unit Tests](https://codeception.com/docs/05-UnitTests) or [Acceptance
 vendor/bin/codecept generate:suite Unit
 vendor/bin/codecept generate:suite Acceptance
 ```
+
+### Using local code for tests
+
+Assuming you have the following directory structure:
+```
+Codeception/
+├─ module-symfony/
+├─ symfony-module-tests/
+│  ├─ composer.json
+│  ├─ composer.lock
+```
+
+Add code listed below to the composer.json and run `composer update`.
+```
+{
+  // ...
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../module-symfony"
+    }
+  ]
+}
+```
+
+Don't forget to revert composer.json and run `composer update` before commit changes.

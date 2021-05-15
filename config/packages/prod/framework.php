@@ -2,28 +2,15 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Config\FrameworkConfig;
 
-return static function (ContainerConfigurator $config): void
+return static function (FrameworkConfig $framework): void
 {
     // Doctrine
-    $config->extension('framework', [
-        'cache' => [
-            'pools' => [
-                'doctrine.result_cache_pool' => [
-                    'adapter' => 'cache.app'
-                ],
-                'doctrine.system_cache_pool' => [
-                    'adapter' => 'cache.system'
-                ]
-            ]
-        ]
-    ]);
+    $cache = $framework->cache();
+    $cache->pool('doctrine.result_cache_pool')->adapters(['cache.app']);
+    $cache->pool('doctrine.system_cache_pool')->adapters(['cache.system']);
 
     // Routing
-    $config->extension('framework', [
-        'router' => [
-            'strict_requirements' => null
-        ]
-    ]);
+    $framework->router()->strictRequirements(null);
 };

@@ -2,23 +2,17 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Config\MonologConfig;
 
-return static function (ContainerConfigurator $config): void
+return static function (MonologConfig $monolog): void
 {
-    $config->extension('monolog', [
-        'handlers' => [
-            'main' => [
-                'type' => 'stream',
-                'path' => '%kernel.logs_dir%/%kernel.environment%.log',
-                'level' => 'debug',
-                'channels' => ['!event']
-            ],
-            'console' => [
-                'type' => 'console',
-                'process_psr_3_messages' => false,
-                'channels' => ['!event', '!doctrine', '!console']
-            ]
-        ]
-    ]);
+    $monolog->handler('main', [
+        'type' => 'stream',
+        'path' => '%kernel.logs_dir%/%kernel.environment%.log',
+        'level' => 'debug',
+    ])->channel('!event');
+    $monolog->handler('console', [
+        'type' => 'console',
+        'process_psr_3_messages' => false,
+    ])->channels()->elements(['!event', '!doctrine', '!console']);
 };

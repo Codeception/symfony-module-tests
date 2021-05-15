@@ -2,29 +2,23 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Config\MonologConfig;
 
-return static function (ContainerConfigurator $config): void
+return static function (MonologConfig $monolog): void
 {
-    $config->extension('monolog', [
-        'handlers' => [
-            'main' => [
-                'type' => 'fingers_crossed',
-                'action_level' => 'error',
-                'handler' => 'nested',
-                'excluded_http_codes' => [404, 405],
-                'buffer_size' => 50
-            ],
-            'nested' => [
-                'type' => 'stream',
-                'path' => '%kernel.logs_dir%/%kernel.environment%.log',
-                'level' => 'debug'
-            ],
-            'console' => [
-                'type' => 'console',
-                'process_psr_3_messages' => false,
-                'channels' => ['!event', '!doctrine']
-            ]
-        ]
+    $monolog->handler('main', [
+        'type' => 'fingers_crossed',
+        'action_level' => 'error',
+        'handler' => 'nested',
+        'buffer_size' => 50
+    ])->excludedHttpCode()->code(404)->code(405);
+    $monolog->handler('nested', [
+        'type' => 'stream',
+        'path' => '%kernel.logs_dir%/%kernel.environment%.log',
+        'level' => 'debug'
     ]);
+    $monolog->handler('console', [
+        'type' => 'console',
+        'process_psr_3_messages' => false
+    ])->channels()->elements(['!event', '!doctrine']);
 };

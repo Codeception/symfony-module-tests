@@ -5,26 +5,26 @@ declare(strict_types=1);
 namespace App\Doctrine;
 
 use App\Entity\User;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class UserHashPasswordListener
 {
-    /** @var UserPasswordEncoderInterface */
-    private $encoder;
+    /** @var UserPasswordHasherInterface */
+    private $hasher;
 
-    public function __construct(UserPasswordEncoderInterface $userPasswordEncoder)
+    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
     {
-        $this->encoder = $userPasswordEncoder;
+        $this->hasher = $userPasswordHasher;
     }
 
     public function prePersist(User $user): void
     {
-        if (!$this->encoder->needsRehash($user)) {
+        if (!$this->hasher->needsRehash($user)) {
             return;
         }
 
         $user->setPassword(
-            $this->encoder->encodePassword(
+            $this->hasher->hashPassword(
                 $user, $user->getPassword()
             )
         );

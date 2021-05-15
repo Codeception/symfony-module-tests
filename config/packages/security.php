@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $configurator): void
 {
     $configurator->extension('security', [
-        'encoders' => [
+        'password_hashers' => [
             User::class => ['algorithm' => 'auto']
         ],
         'providers' => [

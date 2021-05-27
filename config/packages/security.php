@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 use App\Entity\User;
 use App\Security\SecurityAuthenticator;
+use Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter;
 use Symfony\Config\SecurityConfig;
 
 return static function (SecurityConfig $security): void
 {
+    $security->enableAuthenticatorManager(true);
+
     $security->passwordHasher(User::class, [
         'algorithm' => 'auto'
     ]);
@@ -22,22 +25,23 @@ return static function (SecurityConfig $security): void
         'pattern' => '^/(_(profiler|wdt)|css|images|js)/',
         'security' => false
     ]);
-    $security->firewall('main', [
+    $mainFirewall = $security->firewall('main', [
         'lazy' => true,
         'provider' => 'app_user_provider',
-        'guard' => [
-            'authenticators' => [
-                SecurityAuthenticator::class
-            ]
-        ],
+        'custom_authenticators' => [SecurityAuthenticator::class],
         'logout' => [
             'path' => 'app_logout'
         ],
         'remember_me' => [
             'secret' => '%env(APP_SECRET)%'
         ]
-    ])->anonymous();
+    ]);
+    $mainFirewall->formLogin();
+    $mainFirewall->entryPoint('form_login');
 
+    $security->accessControl([
+        'path' => '^/login', 'roles' => AuthenticatedVoter::PUBLIC_ACCESS
+    ]);
     $security->accessControl([
         'path' => '^/dashboard', 'roles' => 'ROLE_USER'
     ]);

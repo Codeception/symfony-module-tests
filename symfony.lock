@@ -138,9 +138,6 @@
     "ergebnis/json-printer": {
         "version": "3.1.1"
     },
-    "fakerphp/faker": {
-        "version": "v1.12.0"
-    },
     "felixfbecker/advanced-json-rpc": {
         "version": "v3.1.1"
     },
@@ -800,21 +797,5 @@
     },
     "webmozart/path-util": {
         "version": "2.3.0"
-    },
-    "zenstruck/callback": {
-        "version": "v1.2.0"
-    },
-    "zenstruck/foundry": {
-        "version": "1.9",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.9",
-            "ref": "e03ffeeb52fd76e99f2c527ecddc9c986cb194e5"
-        },
-        "files": [
-            "./config/packages/dev/zenstruck_foundry.yaml",
-            "./config/packages/test/zenstruck_foundry.yaml"
-        ]
     }
 }

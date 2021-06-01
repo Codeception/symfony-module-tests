@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e812cb95b7e0ddfc4fd429df754bf5e",
+    "content-hash": "02c5b360e370bcc55ec9aaf2b6ab6a25",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -6125,16 +6125,16 @@
         },
         {
             "name": "codeception/module-symfony",
-            "version": "dev-symfony_53",
+            "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/TavoNiievez/module-symfony.git",
-                "reference": "8f8b50fbdaa2460ffd2ac9fbf06f93b07635c762"
+                "url": "https://github.com/Codeception/module-symfony.git",
+                "reference": "3ee80157fac45d883e7bf209a3b9cddd3fc13d5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TavoNiievez/module-symfony/zipball/8f8b50fbdaa2460ffd2ac9fbf06f93b07635c762",
-                "reference": "8f8b50fbdaa2460ffd2ac9fbf06f93b07635c762",
+                "url": "https://api.github.com/repos/Codeception/module-symfony/zipball/3ee80157fac45d883e7bf209a3b9cddd3fc13d5c",
+                "reference": "3ee80157fac45d883e7bf209a3b9cddd3fc13d5c",
                 "shasum": ""
             },
             "require": {
@@ -6152,12 +6152,14 @@
                 "codeception/module-asserts": "Include traditional PHPUnit assertions in your tests",
                 "symfony/web-profiler-bundle": "Tool that gives information about the execution of requests"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "classmap": [
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -6177,9 +6179,10 @@
                 "symfony"
             ],
             "support": {
-                "source": "https://github.com/TavoNiievez/module-symfony/tree/symfony_53"
+                "issues": "https://github.com/Codeception/module-symfony/issues",
+                "source": "https://github.com/Codeception/module-symfony/tree/main"
             },
-            "time": "2021-05-16T14:41:47+00:00"
+            "time": "2021-06-01T01:33:59+00:00"
         },
         {
             "name": "codeception/phpunit-wrapper",

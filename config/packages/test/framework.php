@@ -9,7 +9,7 @@ return static function (FrameworkConfig $framework): void
     // Framework
     $framework->test(true);
     $framework->session([
-        'storage_id' => 'session.storage.mock_file'
+        'storage_factory_id' => 'session.storage.factory.mock_file'
     ]);
 
     // Validator

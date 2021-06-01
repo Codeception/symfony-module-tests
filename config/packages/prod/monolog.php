@@ -14,8 +14,9 @@ return static function (MonologConfig $monolog): void
     ])->excludedHttpCode()->code(404)->code(405);
     $monolog->handler('nested', [
         'type' => 'stream',
-        'path' => '%kernel.logs_dir%/%kernel.environment%.log',
-        'level' => 'debug'
+        'path' => 'php://stderr',
+        'level' => 'debug',
+        'formatter' => 'monolog.formatter.json'
     ]);
     $monolog->handler('console', [
         'type' => 'console',

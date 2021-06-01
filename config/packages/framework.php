@@ -11,9 +11,11 @@ return static function (FrameworkConfig $framework): void
 
     // Framework
     $framework->secret('%env(APP_SECRET)%');
+    $framework->httpMethodOverride(false);
     $framework->session([
         'cookie_secure' => 'auto',
-        'cookie_samesite' => 'lax'
+        'cookie_samesite' => 'lax',
+        'storage_factory_id' => 'session.storage.factory.native'
     ])->handlerId(null);
     $framework->phpErrors([
         'log' => true

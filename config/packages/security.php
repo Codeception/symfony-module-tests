@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\Entity\User;
 use App\Security\SecurityAuthenticator;
-use Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter;
 use Symfony\Config\SecurityConfig;
 
 return static function (SecurityConfig $security): void
@@ -39,9 +38,6 @@ return static function (SecurityConfig $security): void
     $mainFirewall->formLogin();
     $mainFirewall->entryPoint('form_login');
 
-    $security->accessControl([
-        'path' => '^/login', 'roles' => AuthenticatedVoter::PUBLIC_ACCESS
-    ]);
     $security->accessControl([
         'path' => '^/dashboard', 'roles' => 'ROLE_USER'
     ]);

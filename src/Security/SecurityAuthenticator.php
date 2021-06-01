@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Security;
 
-use App\Repository\Model\UserRepositoryInterface;
-use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,16 +30,11 @@ final class SecurityAuthenticator extends AbstractLoginFormAuthenticator
     /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var UserRepository */
-    private $userRepository;
-
     public function __construct(
         UrlGeneratorInterface $urlGenerator,
-        UserRepositoryInterface $userRepository,
         Security $security
     ) {
         $this->urlGenerator = $urlGenerator;
-        $this->userRepository = $userRepository;
     }
 
     public function supports(Request $request): bool

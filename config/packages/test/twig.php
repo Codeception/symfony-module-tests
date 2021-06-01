@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Config\TwigConfig;
 
-return static function (ContainerConfigurator $config): void
+return static function (TwigConfig $twig): void
 {
-    $config->extension('twig', [
-        'strict_variables' => true
-    ]);
+    $twig->strictVariables(true);
 };

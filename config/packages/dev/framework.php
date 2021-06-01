@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Config\FrameworkConfig;
 
-return static function (ContainerConfigurator $config): void
+return static function (FrameworkConfig $framework): void
 {
     // Web Profiler
-    $config->extension('framework', [
-        'profiler' => ['only_exceptions' => false]
+    $framework->profiler([
+        'only_exceptions' => false
     ]);
 };

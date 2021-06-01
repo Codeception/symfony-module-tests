@@ -2,15 +2,11 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Config\TwigConfig;
 
-return static function (ContainerConfigurator $config): void
+return static function (TwigConfig $twig): void
 {
-    $config->extension('twig', [
-        'default_path' => '%kernel.project_dir%/resources/views',
-        'globals' => [
-            'business_shortname' => '%app.business_shortname%',
-            'business_fullname' => '%app.business_fullname%'
-        ]
-    ]);
+    $twig->defaultPath('%kernel.project_dir%/resources/views');
+    $twig->global('business_shortname')->value('%app.business_shortname%');
+    $twig->global('business_shortname')->value('%app.business_fullname%');
 };

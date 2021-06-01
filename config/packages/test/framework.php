@@ -2,27 +2,24 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Config\FrameworkConfig;
 
-return static function (ContainerConfigurator $config): void
+return static function (FrameworkConfig $framework): void
 {
     // Framework
-    $config->extension('framework', [
-        'test' => true,
-        'session' => [
-            'storage_id' => 'session.storage.mock_file'
-        ]
+    $framework->test(true);
+    $framework->session([
+        'storage_factory_id' => 'session.storage.factory.mock_file'
     ]);
 
     // Validator
-    $config->extension('framework', [
-        'validation' => [
-            'not_compromised_password' => false
-        ]
-    ]);
+    $framework->validation()
+        ->notCompromisedPassword()
+        ->enabled(false)
+    ;
 
     // Web Profiler
-    $config->extension('framework', [
-        'profiler' => ['collect' => false]
+    $framework->profiler([
+        'collect' => false
     ]);
 };

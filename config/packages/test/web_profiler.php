@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Config\WebProfilerConfig;
 
-return static function (ContainerConfigurator $config): void
+return static function (WebProfilerConfig $webProfiler): void
 {
-    $config->extension('web_profiler', [
-        'toolbar' => false,
-        'intercept_redirects' => false
-    ]);
+    $webProfiler
+        ->toolbar(false)
+        ->interceptRedirects(false)
+    ;
 };

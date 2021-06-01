@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Config\SensioFrameworkExtraConfig;
 
-return static function (ContainerConfigurator $config): void
+return static function (SensioFrameworkExtraConfig $sensioFramework): void
 {
-    $config->extension('sensio_framework_extra', [
-        'router' => [
-            'annotations' => false
-        ]
+    $sensioFramework->router([
+        'annotations' => false
     ]);
 };

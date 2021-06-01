@@ -28,7 +28,6 @@ final class EventsCest
             '_remember_me' => false
         ]);
         $I->dontseeOrphanEvent();
-        $I->dontSeeOrphanEvent('security.authentication.success');
     }
 
     public function seeEventTriggered(FunctionalTester $I)
@@ -41,6 +40,7 @@ final class EventsCest
 
     public function seeOrphanEvent(FunctionalTester $I)
     {
+       $I->markTestIncomplete('To do: use a new event for this assertion');
         $I->amOnPage('/register');
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'jane_doe@gmail.com',

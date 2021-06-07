@@ -30,7 +30,7 @@ final class SessionCest
         $I->dontSeeInSession('_security_main');
     }
 
-    public function logout(FunctionalTester $I)
+    public function goToLogoutPath(FunctionalTester $I)
     {
         $user = $I->grabEntityFromRepository(User::class, [
             'email' => 'john_doe@gmail.com'
@@ -39,10 +39,24 @@ final class SessionCest
         $I->amOnPage('/dashboard');
         $I->see('You are in the Dashboard!');
 
-        $I->logout();
+        $I->goToLogoutPath();
+        $I->seeCurrentRouteIs('index');
+        $I->dontSeeAuthentication();
+    }
+
+    public function logoutProgrammatically(FunctionalTester $I)
+    {
+        $user = $I->grabEntityFromRepository(User::class, [
+            'email' => 'john_doe@gmail.com'
+        ]);
+        $I->amLoggedInAs($user);
+        $I->amOnPage('/dashboard');
+        $I->see('You are in the Dashboard!');
+
+        $I->logoutProgrammatically();
         $I->amOnPage('/dashboard');
         $I->seeInCurrentUrl('login');
-        $I->dontSee('You are in the Dashboard!');
+        $I->dontSeeAuthentication();
     }
 
     public function seeInSession(FunctionalTester $I)

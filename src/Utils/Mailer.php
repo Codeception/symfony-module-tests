@@ -25,6 +25,8 @@ final class Mailer
             ->from('jeison_doe@gmail.com')
             ->to(new Address($user->getEmail()))
             ->subject('Account created successfully')
+            ->attach('Example attachment')
+            ->text('Example text body')
             ->htmlTemplate('emails/registration.html.twig')
             ->context(['user' => $user]);
 

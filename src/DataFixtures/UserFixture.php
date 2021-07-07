@@ -12,10 +12,11 @@ final class UserFixture extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $user = new User();
-        $user->setEmail('john_doe@gmail.com');
-        $user->setPassword('123456');
-        $user->setRoles(['ROLE_CUSTOMER']);
+        $user = User::create(
+            'john_doe@gmail.com',
+            '123456',
+            ['ROLE_CUSTOMER']
+        );
 
         $manager->persist($user);
         $manager->flush();

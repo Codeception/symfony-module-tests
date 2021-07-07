@@ -516,9 +516,6 @@
     "symfony/http-kernel": {
         "version": "v5.1.8"
     },
-    "symfony/intl": {
-        "version": "v5.1.8"
-    },
     "symfony/mailer": {
         "version": "4.3",
         "recipe": {

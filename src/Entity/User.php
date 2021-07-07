@@ -43,6 +43,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password = '';
 
+    public static function create(string $email, string $password, array $roles = []): self
+    {
+        $user = new self();
+        $user->email = $email;
+        $user->password = $password;
+        $user->roles = $roles;
+        return $user;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -47,7 +47,7 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ matrix.php-versions }}-composer-
 
       - name: Install Composer dependencies
-        run: composer update --no-progress
+        run: composer install --no-progress
 
       - name: Update database schema
         run: php bin/console d:s:u -f

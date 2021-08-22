@@ -3,28 +3,35 @@
 declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
+use Rector\Core\ValueObject\PhpVersion;
+use Rector\Doctrine\Set\DoctrineSetList;
+use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\SetList;
+use Rector\Symfony\Set\SymfonySetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $config): void
-{
+return static function (ContainerConfigurator $config): void {
     $parameters = $config->parameters();
 
-    $parameters->set(Option::SETS, [
-        SetList::ACTION_INJECTION_TO_CONSTRUCTOR_INJECTION,
-        SetList::CODE_QUALITY,
-        SetList::CODE_QUALITY_STRICT,
-        SetList::CODING_STYLE,
-        SetList::DEAD_CODE,
-        SetList::DEFLUENT,
-        SetList::EARLY_RETURN,
-        SetList::FRAMEWORK_EXTRA_BUNDLE_50,
-        SetList::MONOLOG_20,
-        SetList::NAMING,
-        SetList::PHP_73,
-        SetList::PSR_4,
-        SetList::TYPE_DECLARATION,
-        SetList::TYPE_DECLARATION_STRICT,
-        SetList::UNWRAP_COMPAT,
-    ]);
+    $config->import(SetList::ACTION_INJECTION_TO_CONSTRUCTOR_INJECTION);
+    $config->import(SetList::CODE_QUALITY);
+    $config->import(SetList::CODING_STYLE);
+    $config->import(SetList::FRAMEWORK_EXTRA_BUNDLE_50);
+    $config->import(SetList::NAMING);
+    $config->import(SetList::PHP_73);
+    $config->import(SetList::PSR_4);
+    $config->import(SetList::SAFE_07);
+    $config->import(SetList::TYPE_DECLARATION);
+    $config->import(SetList::TYPE_DECLARATION_STRICT);
+    $config->import(SymfonySetList::SYMFONY_52);
+    $config->import(SymfonySetList::SYMFONY_CODE_QUALITY);
+    $config->import(SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION);
+    $config->import(DoctrineSetList::DOCTRINE_ORM_29);
+    $config->import(DoctrineSetList::DOCTRINE_DBAL_30);
+    $config->import(DoctrineSetList::DOCTRINE_CODE_QUALITY);
+    $config->import(DoctrineSetList::DOCTRINE_25);
+    $config->import(PHPUnitSetList::PHPUNIT_91);
+    $config->import(PHPUnitSetList::PHPUNIT_CODE_QUALITY);
+
+    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_73);
 };

@@ -37,9 +37,6 @@ final class SecurityAuthenticator extends AbstractFormLoginAuthenticator
     /** @var UserPasswordEncoderInterface */
     private $passwordEncoder;
 
-    /** @var Security */
-    private $security;
-
     /** @var UserRepositoryInterface */
     private $userRepository;
 
@@ -47,13 +44,11 @@ final class SecurityAuthenticator extends AbstractFormLoginAuthenticator
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $userPasswordEncoder,
-        UserRepositoryInterface $userRepository,
-        Security $security
+        UserRepositoryInterface $userRepository
     ) {
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $userPasswordEncoder;
-        $this->security = $security;
         $this->userRepository = $userRepository;
     }
 

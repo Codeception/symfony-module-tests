@@ -1,0 +1,4 @@
+services:
+  Symfony\Component\Security\Core\Security:
+    alias: 'security.helper'
+    public: true

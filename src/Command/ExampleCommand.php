@@ -14,11 +14,11 @@ final class ExampleCommand extends Command
 {
     /** @var string */
     private const OPTION_SOMETHING = 'something';
+
     /** @var string */
     private const OPTION_SHORT_SOMETHING = 's';
 
-    /** @var SymfonyStyle */
-    private $ioStream;
+    private ?SymfonyStyle $ioStream = null;
 
     /** @var string */
     protected static $defaultName = 'app:example-command';
@@ -48,6 +48,7 @@ final class ExampleCommand extends Command
         } else {
             $this->ioStream->text('Hello world!');
         }
+
         return Command::SUCCESS;
     }
 }

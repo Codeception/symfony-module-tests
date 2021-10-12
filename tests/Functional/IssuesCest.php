@@ -29,7 +29,7 @@ final class IssuesCest
 
         $I->assertSame($ormConnection, $dbalConnection);
 
-        $user = $dbalConnection->fetchOne('SELECT id FROM user WHERE email = :email', [':email' => 'fixture@fixture.test']);
+        $user = $dbalConnection->fetchOne('SELECT id FROM user WHERE email = :email', ['email' => 'fixture@fixture.test']);
         $I->assertNotFalse($user);
     }
 }

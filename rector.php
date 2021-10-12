@@ -17,10 +17,8 @@ return static function (ContainerConfigurator $config): void {
     $config->import(SetList::CODE_QUALITY);
     $config->import(SetList::CODING_STYLE);
     $config->import(SetList::FRAMEWORK_EXTRA_BUNDLE_50);
-    $config->import(SetList::NAMING);
-    $config->import(SetList::PHP_73);
+    $config->import(SetList::PHP_74);
     $config->import(SetList::PSR_4);
-    $config->import(SetList::SAFE_07);
     $config->import(SetList::TYPE_DECLARATION);
     $config->import(SetList::TYPE_DECLARATION_STRICT);
     $config->import(SymfonySetList::SYMFONY_52);
@@ -33,5 +31,5 @@ return static function (ContainerConfigurator $config): void {
     $config->import(PHPUnitSetList::PHPUNIT_91);
     $config->import(PHPUnitSetList::PHPUNIT_CODE_QUALITY);
 
-    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_73);
+    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_74);
 };

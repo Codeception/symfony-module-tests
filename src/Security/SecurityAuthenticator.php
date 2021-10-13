@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security;
 
+use App\Entity\User;
 use App\Repository\Model\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,17 +29,13 @@ final class SecurityAuthenticator extends AbstractFormLoginAuthenticator
     /** @var string */
     public const LOGIN_ROUTE = 'app_login';
 
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
+    private UrlGeneratorInterface $urlGenerator;
 
-    /** @var CsrfTokenManagerInterface */
-    private $csrfTokenManager;
+    private CsrfTokenManagerInterface $csrfTokenManager;
 
-    /** @var UserPasswordEncoderInterface */
-    private $passwordEncoder;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
-    /** @var UserRepositoryInterface */
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
     public function __construct(
         UrlGeneratorInterface $urlGenerator,
@@ -57,6 +54,7 @@ final class SecurityAuthenticator extends AbstractFormLoginAuthenticator
         if (self::LOGIN_ROUTE !== $request->attributes->get('_route')) {
             return false;
         }
+
         return $request->isMethod('POST');
     }
 
@@ -84,7 +82,7 @@ final class SecurityAuthenticator extends AbstractFormLoginAuthenticator
 
         $user = $this->userRepository->getByEmail($credentials['email']);
 
-        if ($user === null) {
+        if (!$user instanceof User) {
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 

@@ -20,27 +20,23 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @var int|null
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @var string
      */
-    private $email = '';
+    private string $email = '';
 
     /**
      * @ORM\Column(type="json")
-     * @var array
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @ORM\Column(type="string")
-     * @var string
      */
-    private $password = '';
+    private string $password = '';
 
     public static function create(string $email, string $password, array $roles = []): self
     {

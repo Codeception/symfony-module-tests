@@ -9,8 +9,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class UserHashPasswordListener
 {
-    /** @var UserPasswordEncoderInterface */
-    private $encoder;
+    private UserPasswordEncoderInterface $encoder;
 
     public function __construct(UserPasswordEncoderInterface $userPasswordEncoder)
     {

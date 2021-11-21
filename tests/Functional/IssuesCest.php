@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
-use App\Tests\FunctionalTester;
 use App\Entity\User;
+use App\Tests\FunctionalTester;
 use Doctrine\DBAL\Connection;
 
 final class IssuesCest

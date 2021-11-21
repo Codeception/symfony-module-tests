@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
-use App\Tests\FunctionalTester;
 use App\Entity\User;
+use App\Tests\FunctionalTester;
 use Doctrine\DBAL\Connection;
 
 final class IssuesCest
@@ -29,7 +29,7 @@ final class IssuesCest
 
         $I->assertSame($ormConnection, $dbalConnection);
 
-        $user = $dbalConnection->fetchOne('SELECT id FROM user WHERE email = :email', [':email' => 'fixture@fixture.test']);
+        $user = $dbalConnection->fetchOne('SELECT id FROM user WHERE email = :email', ['email' => 'fixture@fixture.test']);
         $I->assertNotFalse($user);
     }
 }

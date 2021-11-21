@@ -9,8 +9,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class UserHashPasswordListener
 {
-    /** @var UserPasswordHasherInterface */
-    private $hasher;
+    private UserPasswordHasherInterface $hasher;
 
     public function __construct(UserPasswordHasherInterface $userPasswordHasher)
     {

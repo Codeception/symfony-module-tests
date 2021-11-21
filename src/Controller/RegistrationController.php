@@ -14,11 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class RegistrationController extends AbstractController
 {
-    /** @var Mailer */
-    private $mailer;
+    private Mailer $mailer;
 
-    /** @var UserRepositoryInterface */
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
     public function __construct(Mailer $mailer, UserRepositoryInterface $userRepository)
     {

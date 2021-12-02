@@ -3,17 +3,17 @@ name: CI
 on:
   push:
     branches:
-      - 'main'
+      - '5.4'
   pull_request:
     branches:
-      - 'main'
+      - '5.4'
 
 env:
   APP_ENV: test
 
 jobs:
   symfony:
-    name: Symfony 5.3 (PHP ${{ matrix.php-versions }})
+    name: Symfony 5.4 (PHP ${{ matrix.php-versions }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true

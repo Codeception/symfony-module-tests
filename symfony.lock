@@ -59,6 +59,9 @@
     "codeception/stub": {
         "version": "3.7.0"
     },
+    "composer/pcre": {
+        "version": "1.0.0"
+    },
     "composer/semver": {
         "version": "3.2.4"
     },

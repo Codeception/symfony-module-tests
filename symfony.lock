@@ -171,6 +171,9 @@
             "./.php-cs-fixer.dist.php"
         ]
     },
+    "graham-campbell/result-type": {
+        "version": "1.0.x-dev"
+    },
     "guzzlehttp/guzzle": {
         "version": "7.2.0"
     },
@@ -218,6 +221,9 @@
     },
     "phpmd/phpmd": {
         "version": "2.9.1"
+    },
+    "phpoption/phpoption": {
+        "version": "1.8-dev"
     },
     "phpspec/prophecy": {
         "version": "1.12.1"
@@ -477,9 +483,6 @@
             "./src/Kernel.php"
         ]
     },
-    "symfony/http-client-contracts": {
-        "version": "v2.3.1"
-    },
     "symfony/http-foundation": {
         "version": "v5.1.8"
     },
@@ -711,6 +714,9 @@
     },
     "vimeo/psalm": {
         "version": "4.2.1"
+    },
+    "vlucas/phpdotenv": {
+        "version": "5.4-dev"
     },
     "webmozart/assert": {
         "version": "1.9.1"

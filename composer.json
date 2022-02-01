@@ -29,11 +29,12 @@
         "symfony/yaml": "4.4.*"
     },
     "require-dev": {
-        "codeception/codeception": "^4.1",
-        "codeception/module-asserts": "^2.0",
-        "codeception/module-doctrine2": "^2.0",
-        "codeception/module-phpbrowser": "^2.0",
-        "codeception/module-symfony": "^2.1 | @dev",
+        "codeception/codeception": "^5.0 | *@dev",
+        "codeception/lib-innerbrowser": "^2.0 | *@dev",
+        "codeception/module-asserts": "^2.0 | *@dev",
+        "codeception/module-doctrine2": "^2.0 | *@dev",
+        "codeception/module-phpbrowser": "^2.0 | *@dev",
+        "codeception/module-symfony": "^2.1 | *@dev",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^3.0",
         "phpmd/phpmd": "^2.10",
@@ -53,6 +54,10 @@
         "sort-packages": true,
         "platform": {
             "php": "7.4.0"
+        },
+        "allow-plugins": {
+            "symfony/flex": true,
+            "composer/package-versions-deprecated": true
         }
     },
     "autoload": {

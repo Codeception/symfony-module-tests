@@ -9,6 +9,7 @@
             "homepage": "https://medium.com/@ganieves"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": ">=7.4.0",
         "ext-ctype": "*",
@@ -29,11 +30,12 @@
         "symfony/yaml": "4.4.*"
     },
     "require-dev": {
-        "codeception/codeception": "^4.1",
-        "codeception/module-asserts": "^2.0",
-        "codeception/module-doctrine2": "^2.0",
-        "codeception/module-phpbrowser": "^2.0",
-        "codeception/module-symfony": "^2.1 | @dev",
+        "codeception/codeception": "^5.0.0-alpha1",
+        "codeception/lib-innerbrowser": "^2.0 | *@dev",
+        "codeception/module-asserts": "^2.0 | *@dev",
+        "codeception/module-doctrine2": "^2.0 | *@dev",
+        "codeception/module-phpbrowser": "^2.0 | *@dev",
+        "codeception/module-symfony": "dev-codecept5",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^3.0",
         "phpmd/phpmd": "^2.10",
@@ -42,8 +44,7 @@
         "symfony/maker-bundle": "^1.33",
         "symfony/twig-bundle": "4.4.*",
         "symfony/var-dumper": "4.4.*",
-        "symfony/web-profiler-bundle": "4.4.*",
-        "vimeo/psalm": "^4.9"
+        "symfony/web-profiler-bundle": "4.4.*"
     },
     "config": {
         "optimize-autoloader": true,
@@ -53,6 +54,10 @@
         "sort-packages": true,
         "platform": {
             "php": "7.4.0"
+        },
+        "allow-plugins": {
+            "symfony/flex": true,
+            "composer/package-versions-deprecated": true
         }
     },
     "autoload": {

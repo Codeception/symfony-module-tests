@@ -171,6 +171,9 @@
             "./.php-cs-fixer.dist.php"
         ]
     },
+    "graham-campbell/result-type": {
+        "version": "1.0.x-dev"
+    },
     "guzzlehttp/guzzle": {
         "version": "7.2.0"
     },
@@ -218,6 +221,9 @@
     },
     "phpmd/phpmd": {
         "version": "2.9.1"
+    },
+    "phpoption/phpoption": {
+        "version": "1.8-dev"
     },
     "phpspec/prophecy": {
         "version": "1.12.1"
@@ -549,9 +555,6 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.20.0"
     },
-    "symfony/polyfill-php73": {
-        "version": "v1.20.0"
-    },
     "symfony/polyfill-php80": {
         "version": "v1.20.0"
     },
@@ -599,9 +602,6 @@
         "version": "v5.1.8"
     },
     "symfony/security-csrf": {
-        "version": "v5.1.8"
-    },
-    "symfony/security-guard": {
         "version": "v5.1.8"
     },
     "symfony/security-http": {
@@ -711,6 +711,9 @@
     },
     "vimeo/psalm": {
         "version": "4.2.1"
+    },
+    "vlucas/phpdotenv": {
+        "version": "5.4-dev"
     },
     "webmozart/assert": {
         "version": "1.9.1"

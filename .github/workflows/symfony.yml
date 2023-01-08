@@ -3,22 +3,22 @@ name: CI
 on:
   push:
     branches:
-      - '6.0'
+      - '6.2'
   pull_request:
     branches:
-      - '6.0'
+      - '6.2'
 
 env:
   APP_ENV: test
 
 jobs:
   symfony:
-    name: Symfony 5.4 (PHP ${{ matrix.php-versions }})
+    name: Symfony 6.2 (PHP ${{ matrix.php-versions }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
-        php-versions: ['8.0', '8.1']
+        php-versions: ['8.1', '8.2']
     steps:
       - name: Checkout
         uses: actions/checkout@v2

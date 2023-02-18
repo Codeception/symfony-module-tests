@@ -19,6 +19,14 @@ final class EventsCest
         $I->dontSeeEventTriggered([ErrorListener::class, ErrorListener::class]);
     }
 
+    public function dontSeeEventListenerIsCalled(FunctionalTester $I)
+    {
+        $I->amOnPage('/');
+        $I->dontSeeEventListenerIsCalled(ErrorListener::class);
+        $I->dontSeeEventListenerIsCalled(new ErrorListener());
+        $I->dontSeeEventListenerIsCalled([ErrorListener::class, ErrorListener::class]);
+    }
+
     public function dontSeeOrphanEvent(FunctionalTester $I)
     {
         $I->amOnPage('/login');
@@ -38,9 +46,17 @@ final class EventsCest
         $I->seeEventTriggered([SecurityListener::class, RouterDataCollector::class]);
     }
 
+    public function seeEventListenerIsCalled(FunctionalTester $I)
+    {
+        $I->amOnPage('/');
+        $I->seeEventListenerIsCalled(SecurityListener::class);
+        $I->seeEventListenerIsCalled(new RouterDataCollector());
+        $I->seeEventListenerIsCalled([SecurityListener::class, RouterDataCollector::class]);
+    }
+
     public function seeOrphanEvent(FunctionalTester $I)
     {
-       $I->markTestIncomplete('To do: use a new event for this assertion');
+        $I->markTestIncomplete('To do: use a new event for this assertion');
         $I->amOnPage('/register');
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'jane_doe@gmail.com',

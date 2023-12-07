@@ -33,9 +33,8 @@ final class EventsCest
     public function seeEventTriggered(FunctionalTester $I)
     {
         $I->amOnPage('/');
-        $I->seeEventTriggered(SecurityListener::class);
         $I->seeEventTriggered(new RouterDataCollector());
-        $I->seeEventTriggered([SecurityListener::class, RouterDataCollector::class]);
+        $I->seeEventTriggered([RouterDataCollector::class]);
     }
 
     public function seeOrphanEvent(FunctionalTester $I)

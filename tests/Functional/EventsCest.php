@@ -15,6 +15,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class EventsCest
 {
+    /**
+     * @deprecated in favor of dontSeeEventListenerIsCalled
+     */
     public function dontSeeEventTriggered(FunctionalTester $I)
     {
         $I->amOnPage('/');
@@ -29,6 +32,9 @@ final class EventsCest
         $I->dontSeeEventListenerIsCalled(ErrorListener::class);
         $I->dontSeeEventListenerIsCalled(new ErrorListener());
         $I->dontSeeEventListenerIsCalled([ErrorListener::class, ErrorListener::class]);
+        // with events
+        $I->dontSeeEventListenerIsCalled(SecurityListener::class, KernelEvents::EXCEPTION);
+        $I->dontSeeEventListenerIsCalled(SecurityListener::class, [KernelEvents::REQUEST, KernelEvents::EXCEPTION]);
     }
 
     public function dontSeeOrphanEvent(FunctionalTester $I)
@@ -49,6 +55,9 @@ final class EventsCest
         $I->dontSeeEvent([new UserRegisteredEvent(), ConsoleEvents::COMMAND]);
     }
 
+    /**
+     * @deprecated in favor of seeEventListenerIsCalled
+     */
     public function seeEventTriggered(FunctionalTester $I)
     {
         $I->amOnPage('/');
@@ -63,6 +72,9 @@ final class EventsCest
         $I->seeEventListenerIsCalled(SecurityListener::class);
         $I->seeEventListenerIsCalled(new RouterDataCollector());
         $I->seeEventListenerIsCalled([SecurityListener::class, RouterDataCollector::class]);
+        // with events
+        $I->seeEventListenerIsCalled(SecurityListener::class, KernelEvents::CONTROLLER_ARGUMENTS);
+        $I->seeEventListenerIsCalled(LocaleListener::class, [KernelEvents::REQUEST, KernelEvents::FINISH_REQUEST]);
     }
 
     public function seeOrphanEvent(FunctionalTester $I)

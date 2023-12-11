@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
+use App\Event\UserRegisteredEvent;
 use App\Tests\FunctionalTester;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener;
 use Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector;
+use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\EventListener\ErrorListener;
+use Symfony\Component\HttpKernel\EventListener\LocaleListener;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 final class EventsCest
 {
@@ -35,7 +39,14 @@ final class EventsCest
             'password' => '123456',
             '_remember_me' => false
         ]);
-        $I->dontseeOrphanEvent();
+        $I->dontSeeOrphanEvent();
+    }
+
+    public function dontSeeEvent(FunctionalTester $I)
+    {
+        $I->amOnPage('/');
+        $I->dontSeeEvent(KernelEvents::EXCEPTION);
+        $I->dontSeeEvent([new UserRegisteredEvent(), ConsoleEvents::COMMAND]);
     }
 
     public function seeEventTriggered(FunctionalTester $I)
@@ -56,13 +67,26 @@ final class EventsCest
 
     public function seeOrphanEvent(FunctionalTester $I)
     {
-        $I->markTestIncomplete('To do: use a new event for this assertion');
         $I->amOnPage('/register');
+        $I->stopFollowingRedirects();
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'jane_doe@gmail.com',
             '[plainPassword]' => '123456',
             '[agreeTerms]' => true
         ]);
-        $I->seeOrphanEvent('security.authentication.success');
+        $I->seeOrphanEvent(UserRegisteredEvent::class);
+    }
+
+    public function seeEvent(FunctionalTester $I)
+    {
+        $I->amOnPage('/register');
+        $I->stopFollowingRedirects();
+        $I->submitSymfonyForm('registration_form', [
+            '[email]' => 'jane_doe@gmail.com',
+            '[plainPassword]' => '123456',
+            '[agreeTerms]' => true
+        ]);
+        $I->seeEvent(UserRegisteredEvent::class);
+        $I->seeEvent(KernelEvents::REQUEST, KernelEvents::FINISH_REQUEST);
     }
 }

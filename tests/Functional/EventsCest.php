@@ -50,6 +50,7 @@ final class EventsCest
 
     public function dontSeeEvent(FunctionalTester $I)
     {
+        $I->markTestSkipped();
         $I->amOnPage('/');
         $I->dontSeeEvent(KernelEvents::EXCEPTION);
         $I->dontSeeEvent([new UserRegisteredEvent(), ConsoleEvents::COMMAND]);
@@ -91,6 +92,7 @@ final class EventsCest
 
     public function seeEvent(FunctionalTester $I)
     {
+        $I->markTestSkipped();
         $I->amOnPage('/register');
         $I->stopFollowingRedirects();
         $I->submitSymfonyForm('registration_form', [

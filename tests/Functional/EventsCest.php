@@ -6,11 +6,11 @@ namespace App\Tests\Functional;
 
 use App\Event\UserRegisteredEvent;
 use App\Tests\FunctionalTester;
-use Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener;
 use Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\EventListener\ErrorListener;
 use Symfony\Component\HttpKernel\EventListener\LocaleListener;
+use Symfony\Component\HttpKernel\EventListener\RouterListener;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class EventsCest
@@ -33,8 +33,8 @@ final class EventsCest
         $I->dontSeeEventListenerIsCalled(new ErrorListener());
         $I->dontSeeEventListenerIsCalled([ErrorListener::class, ErrorListener::class]);
         // with events
-        $I->dontSeeEventListenerIsCalled(SecurityListener::class, KernelEvents::EXCEPTION);
-        $I->dontSeeEventListenerIsCalled(SecurityListener::class, [KernelEvents::REQUEST, KernelEvents::EXCEPTION]);
+        $I->dontSeeEventListenerIsCalled(RouterListener::class, KernelEvents::EXCEPTION);
+        $I->dontSeeEventListenerIsCalled(RouterListener::class, [KernelEvents::RESPONSE, KernelEvents::EXCEPTION]);
     }
 
     public function dontSeeOrphanEvent(FunctionalTester $I)
@@ -62,19 +62,19 @@ final class EventsCest
     public function seeEventTriggered(FunctionalTester $I)
     {
         $I->amOnPage('/');
-        $I->seeEventTriggered(SecurityListener::class);
+        $I->seeEventTriggered(RouterListener::class);
         $I->seeEventTriggered(new RouterDataCollector());
-        $I->seeEventTriggered([SecurityListener::class, RouterDataCollector::class]);
+        $I->seeEventTriggered([RouterListener::class, RouterDataCollector::class]);
     }
 
     public function seeEventListenerIsCalled(FunctionalTester $I)
     {
         $I->amOnPage('/');
-        $I->seeEventListenerIsCalled(SecurityListener::class);
+        $I->seeEventListenerIsCalled(RouterListener::class);
         $I->seeEventListenerIsCalled(new RouterDataCollector());
-        $I->seeEventListenerIsCalled([SecurityListener::class, RouterDataCollector::class]);
+        $I->seeEventListenerIsCalled([RouterListener::class, RouterDataCollector::class]);
         // with events
-        $I->seeEventListenerIsCalled(SecurityListener::class, KernelEvents::CONTROLLER_ARGUMENTS);
+        $I->seeEventListenerIsCalled(RouterListener::class, KernelEvents::REQUEST);
         $I->seeEventListenerIsCalled(LocaleListener::class, [KernelEvents::REQUEST, KernelEvents::FINISH_REQUEST]);
     }
 

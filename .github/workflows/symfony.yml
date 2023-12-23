@@ -3,17 +3,17 @@ name: CI
 on:
   push:
     branches:
-      - '6.2'
+      - '6.3'
   pull_request:
     branches:
-      - '6.2'
+      - '6.3'
 
 env:
   APP_ENV: test
 
 jobs:
   symfony:
-    name: Symfony 6.2 (PHP ${{ matrix.php-versions }})
+    name: Symfony 6.3 (PHP ${{ matrix.php-versions }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true

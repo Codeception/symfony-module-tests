@@ -16,35 +16,35 @@
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "2.6",
         "symfony/apache-pack": "^1.0",
-        "symfony/console": "6.2.*",
-        "symfony/dotenv": "6.2.*",
+        "symfony/console": "6.3.*",
+        "symfony/dotenv": "6.3.*",
         "symfony/flex": "^2.1",
-        "symfony/form": "6.2.*",
-        "symfony/framework-bundle": "6.2.*",
-        "symfony/mailer": "6.2.*",
-        "symfony/runtime": "6.2.*",
-        "symfony/security-bundle": "6.2.*",
-        "symfony/translation": "6.2.*",
-        "symfony/validator": "6.2.*",
-        "symfony/yaml": "6.2.*"
+        "symfony/form": "6.3.*",
+        "symfony/framework-bundle": "6.3.*",
+        "symfony/mailer": "6.3.*",
+        "symfony/runtime": "6.3.*",
+        "symfony/security-bundle": "6.3.*",
+        "symfony/translation": "6.3.*",
+        "symfony/validator": "6.3.*",
+        "symfony/yaml": "6.3.*"
     },
     "require-dev": {
         "codeception/codeception": "^5.0.0",
         "codeception/module-asserts": "^3.0",
         "codeception/module-doctrine2": "^3.0",
         "codeception/module-phpbrowser": "^3.0",
-        "codeception/module-symfony": "^3.0",
+        "codeception/module-symfony": "^3.0 | *@dev",
         "doctrine/doctrine-fixtures-bundle": "^3.4.2",
         "friendsofphp/php-cs-fixer": "^3.3",
         "phpmd/phpmd": "^2.11",
         "phpunit/phpunit": "^10.0",
         "rector/rector": "^0.12.5",
         "squizlabs/php_codesniffer": "^3.6",
-        "symfony/debug-bundle": "6.2.*",
+        "symfony/debug-bundle": "6.3.*",
         "symfony/maker-bundle": "^1.41",
-        "symfony/twig-bundle": "6.2.*",
-        "symfony/var-dumper": "6.2.*",
-        "symfony/web-profiler-bundle": "6.2.*",
+        "symfony/twig-bundle": "6.3.*",
+        "symfony/var-dumper": "6.3.*",
+        "symfony/web-profiler-bundle": "6.3.*",
         "vlucas/phpdotenv": "^5.4"
     },
     "config": {
@@ -113,7 +113,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.2.*"
+            "require": "6.3.*"
         }
     }
 }

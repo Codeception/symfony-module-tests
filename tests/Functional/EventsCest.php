@@ -6,6 +6,7 @@ namespace App\Tests\Functional;
 
 use App\Event\UserRegisteredEvent;
 use App\Tests\FunctionalTester;
+use PHPUnit\Framework\ExpectationFailedException;
 use Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\EventListener\ErrorListener;
@@ -43,14 +44,13 @@ final class EventsCest
         $I->submitForm('form[name=login]', [
             'email' => 'john_doe@gmail.com',
             'password' => '123456',
-            '_remember_me' => false
+            '_remember_me' => false,
         ]);
         $I->dontSeeOrphanEvent();
     }
 
     public function dontSeeEvent(FunctionalTester $I)
     {
-        $I->markTestSkipped();
         $I->amOnPage('/');
         $I->dontSeeEvent(KernelEvents::EXCEPTION);
         $I->dontSeeEvent([new UserRegisteredEvent(), ConsoleEvents::COMMAND]);
@@ -85,22 +85,28 @@ final class EventsCest
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'jane_doe@gmail.com',
             '[plainPassword]' => '123456',
-            '[agreeTerms]' => true
+            '[agreeTerms]' => true,
         ]);
         $I->seeOrphanEvent(UserRegisteredEvent::class);
     }
 
     public function seeEvent(FunctionalTester $I)
     {
-        $I->markTestSkipped();
         $I->amOnPage('/register');
         $I->stopFollowingRedirects();
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'jane_doe@gmail.com',
             '[plainPassword]' => '123456',
-            '[agreeTerms]' => true
+            '[agreeTerms]' => true,
         ]);
         $I->seeEvent(UserRegisteredEvent::class);
         $I->seeEvent(KernelEvents::REQUEST, KernelEvents::FINISH_REQUEST);
+        try {
+            $I->seeEvent('non-existent-event');
+        } catch (ExpectationFailedException $ex) {
+            $I->assertTrue(true, 'seeEvent assertion fails with non-existent events.');
+            return;
+        }
+        $I->fail('seeEvent assertion did not fail as expected');
     }
 }

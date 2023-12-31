@@ -10,6 +10,7 @@
         }
     ],
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=8.0.2",
         "ext-ctype": "*",
@@ -30,7 +31,7 @@
         "symfony/yaml": "4.4.*"
     },
     "require-dev": {
-        "codeception/codeception": "^5.0.0-RC3",
+        "codeception/codeception": "^5.0.8",
         "codeception/lib-innerbrowser": "^3.1",
         "codeception/module-asserts": "^3.0",
         "codeception/module-doctrine2": "^3.0",

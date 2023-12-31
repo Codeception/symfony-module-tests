@@ -516,9 +516,6 @@
     "symfony/options-resolver": {
         "version": "v5.1.8"
     },
-    "symfony/polyfill-intl-grapheme": {
-        "version": "v1.24.0"
-    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.20.0"
     },
@@ -548,9 +545,6 @@
     },
     "symfony/property-access": {
         "version": "v5.1.8"
-    },
-    "symfony/property-info": {
-        "version": "v5.4.3"
     },
     "symfony/routing": {
         "version": "5.1",
@@ -595,9 +589,6 @@
     },
     "symfony/stopwatch": {
         "version": "v5.1.8"
-    },
-    "symfony/string": {
-        "version": "v5.4.3"
     },
     "symfony/translation": {
         "version": "3.3",

@@ -9,7 +9,7 @@ use App\Event\UserRegisteredEvent;
 use App\Form\RegistrationFormType;
 use App\Repository\Model\UserRepositoryInterface;
 use App\Utils\Mailer;
-use Psr\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

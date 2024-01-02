@@ -9,8 +9,7 @@
             "homepage": "https://medium.com/@ganieves"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "minimum-stability": "RC",
     "require": {
         "php": ">=8.0.2",
         "ext-ctype": "*",
@@ -20,6 +19,7 @@
         "symfony/apache-pack": "^1.0",
         "symfony/console": "4.4.*",
         "symfony/dotenv": "4.4.*",
+        "symfony/event-dispatcher": "4.4.*",
         "symfony/flex": "^1.14",
         "symfony/form": "4.4.*",
         "symfony/framework-bundle": "4.4.*",

@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 use Symfony\Config\WebProfilerConfig;
 
-return static function (WebProfilerConfig $webProfiler): void
-{
+return static function (WebProfilerConfig $webProfiler): void {
     $webProfiler
         ->toolbar(false)
-        ->interceptRedirects(false)
-    ;
+        ->interceptRedirects(false);
 };

@@ -9,17 +9,16 @@ use App\Controller\SecurityController;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routes): void {
-
     $routes->add('index', '/')
         ->controller(HomeController::class)
         ->methods(['GET']);
 
     $routes->add('app_login', '/login')
-        ->controller(SecurityController::class . '::login')
+        ->controller([SecurityController::class, 'login'])
         ->methods(['GET', 'POST']);
 
     $routes->add('app_logout', '/logout')
-        ->controller(SecurityController::class . '::logout')
+        ->controller([SecurityController::class, 'logout'])
         ->methods(['GET']);
 
     $routes->add('dashboard', '/dashboard')

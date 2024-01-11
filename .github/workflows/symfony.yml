@@ -3,22 +3,22 @@ name: CI
 on:
   push:
     branches:
-      - '6.4'
+      - '7.0'
   pull_request:
     branches:
-      - '6.4'
+      - '7.0'
 
 env:
   APP_ENV: test
 
 jobs:
   symfony:
-    name: Symfony 6.4 (PHP ${{ matrix.php-versions }})
+    name: Symfony 7.0 (PHP ${{ matrix.php-versions }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
-        php-versions: ['8.1', '8.2', '8.3']
+        php-versions: ['8.2', '8.3']
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -50,10 +50,10 @@ jobs:
         run: composer install --no-progress
 
       - name: Update database schema
-        run: php bin/console d:s:u -f
+        run: php bin/console doctrine:schema:update --force
 
       - name: Load Doctrine fixtures
-        run: php bin/console d:f:l -q
+        run: php bin/console doctrine:fixtures:load --quiet
 
       - name: Run functional tests
         run: vendor/bin/codecept run Functional

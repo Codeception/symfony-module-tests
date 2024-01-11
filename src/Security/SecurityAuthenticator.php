@@ -25,11 +25,8 @@ final class SecurityAuthenticator extends AbstractLoginFormAuthenticator
     /** @var string */
     public const LOGIN_ROUTE = 'app_login';
 
-    private UrlGeneratorInterface $urlGenerator;
-
-    public function __construct(UrlGeneratorInterface $urlGenerator)
+    public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
     {
-        $this->urlGenerator = $urlGenerator;
     }
 
     public function supports(Request $request): bool

@@ -5,6 +5,5 @@ declare(strict_types=1);
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routes): void {
-    $routes->import('@FrameworkBundle/Resources/config/routing/errors.xml')
-        ->prefix('/_error');
+    $routes->import('security.route_loader.logout', 'service');
 };

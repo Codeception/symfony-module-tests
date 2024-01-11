@@ -1,10 +1,11 @@
 namespace: App\Tests
+support_namespace: Support
 paths:
     tests: tests
-    support: tests/_build/support
-    data: tests/_build/data
-    envs: tests/_build/envs
-    output: tests/_build/output
+    output: tests/_output
+    data: tests/Support/Data
+    support: tests/Support
+    envs: tests/_envs
 actor_suffix: Tester
 extensions:
     enabled:

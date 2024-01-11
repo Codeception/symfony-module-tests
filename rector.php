@@ -2,34 +2,47 @@
 
 declare(strict_types=1);
 
-use Rector\Core\Configuration\Option;
-use Rector\Core\ValueObject\PhpVersion;
+use Rector\Config\RectorConfig;
 use Rector\Doctrine\Set\DoctrineSetList;
+use Rector\PHPUnit\Set\PHPUnitLevelSetList;
 use Rector\PHPUnit\Set\PHPUnitSetList;
+use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
+use Rector\Symfony\Set\SymfonyLevelSetList;
 use Rector\Symfony\Set\SymfonySetList;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $config): void {
-    $parameters = $config->parameters();
+return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig->paths([
+        __DIR__ . '/src',
+    ]);
 
-    $config->import(SetList::ACTION_INJECTION_TO_CONSTRUCTOR_INJECTION);
-    $config->import(SetList::CODE_QUALITY);
-    $config->import(SetList::CODING_STYLE);
-    $config->import(SetList::FRAMEWORK_EXTRA_BUNDLE_50);
-    $config->import(SetList::PHP_74);
-    $config->import(SetList::PSR_4);
-    $config->import(SetList::TYPE_DECLARATION);
-    $config->import(SetList::TYPE_DECLARATION_STRICT);
-    $config->import(SymfonySetList::SYMFONY_52);
-    $config->import(SymfonySetList::SYMFONY_CODE_QUALITY);
-    $config->import(SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION);
-    $config->import(DoctrineSetList::DOCTRINE_ORM_29);
-    $config->import(DoctrineSetList::DOCTRINE_DBAL_30);
-    $config->import(DoctrineSetList::DOCTRINE_CODE_QUALITY);
-    $config->import(DoctrineSetList::DOCTRINE_25);
-    $config->import(PHPUnitSetList::PHPUNIT_91);
-    $config->import(PHPUnitSetList::PHPUNIT_CODE_QUALITY);
-
-    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_74);
+    $rectorConfig->sets([
+        DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
+        DoctrineSetList::DOCTRINE_BUNDLE_210,
+        DoctrineSetList::DOCTRINE_CODE_QUALITY,
+        DoctrineSetList::DOCTRINE_COMMON_20,
+        DoctrineSetList::DOCTRINE_DBAL_40,
+        DoctrineSetList::DOCTRINE_ORM_214,
+        LevelSetList::UP_TO_PHP_82,
+        PHPUnitLevelSetList::UP_TO_PHPUNIT_100,
+        PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES,
+        PHPUnitSetList::PHPUNIT_100,
+        PHPUnitSetList::PHPUNIT_CODE_QUALITY,
+        SetList::CODE_QUALITY,
+        SetList::CODING_STYLE,
+        SetList::DEAD_CODE,
+        SetList::EARLY_RETURN,
+        SetList::INSTANCEOF,
+        SetList::NAMING,
+        SetList::PHP_82,
+        SetList::PRIVATIZATION,
+        SetList::STRICT_BOOLEANS,
+        SetList::TYPE_DECLARATION,
+        SymfonyLevelSetList::UP_TO_SYMFONY_63,
+        SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
+        SymfonySetList::CONFIGS,
+        SymfonySetList::SYMFONY_64,
+        SymfonySetList::SYMFONY_CODE_QUALITY,
+        SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
+    ]);
 };

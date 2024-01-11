@@ -7,13 +7,10 @@ namespace App\Doctrine;
 use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-final class UserHashPasswordListener
+final readonly class UserHashPasswordListener
 {
-    private UserPasswordHasherInterface $hasher;
-
-    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
+    public function __construct(private UserPasswordHasherInterface $hasher)
     {
-        $this->hasher = $userPasswordHasher;
     }
 
     public function prePersist(User $user): void

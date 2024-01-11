@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
-use App\Tests\FunctionalTester;
-use Symfony\Component\Security\Core\Security;
+use App\Tests\Support\FunctionalTester;
+use Symfony\Bundle\SecurityBundle\Security;
 
 final class ServicesCest
 {

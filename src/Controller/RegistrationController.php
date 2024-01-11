@@ -16,20 +16,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class RegistrationController extends AbstractController
 {
-    private Mailer $mailer;
-
-    private UserRepositoryInterface $userRepository;
-
-    private EventDispatcherInterface $eventDispatcher;
-
     public function __construct(
-        Mailer $mailer,
-        UserRepositoryInterface $userRepository,
-        EventDispatcherInterface $eventDispatcher
+        private readonly Mailer $mailer,
+        private readonly UserRepositoryInterface $userRepository,
+        private readonly EventDispatcherInterface $eventDispatcher
     ) {
-        $this->mailer = $mailer;
-        $this->userRepository = $userRepository;
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function __invoke(Request $request): Response
@@ -52,7 +43,7 @@ final class RegistrationController extends AbstractController
         }
 
         return $this->render('security/register.html.twig', [
-            'registrationForm' => $form->createView(),
+            'registrationForm' => $form,
         ]);
     }
 }

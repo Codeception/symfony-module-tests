@@ -4,10 +4,8 @@ modules:
     enabled:
         - Asserts
         - Symfony:
-            app_path: 'src'
-            environment: 'test'
-            mailer: 'symfony_mailer'
+              app_path: 'src'
+              environment: 'test'
         - Doctrine2:
-            depends: Symfony
-            cleanup: true
-        - \App\Tests\Helper\Functional
+              depends: Symfony
+              cleanup: true

@@ -50,10 +50,10 @@ jobs:
         run: composer install --no-progress
 
       - name: Update database schema
-        run: php bin/console d:s:u -f
+        run: php bin/console doctrine:schema:update --force
 
       - name: Load Doctrine fixtures
-        run: php bin/console d:f:l -q
+        run: php bin/console doctrine:fixtures:load --quiet
 
       - name: Run functional tests
         run: vendor/bin/codecept run Functional

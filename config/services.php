@@ -3,14 +3,13 @@
 declare(strict_types=1);
 
 use App\Doctrine\UserHashPasswordListener;
+use App\Entity\User;
+use Doctrine\ORM\Events;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $config): void
-{
+return static function (ContainerConfigurator $config): void {
     $config->parameters()
-        ->set('locale', 'es')
-        ->set('app.business_shortname', '%env(BUSINESS_SHORTNAME)%')
-        ->set('app.business_fullname', '%env(BUSINESS_FULLNAME)%');
+        ->set('app.business_name', '%env(BUSINESS_NAME)%');
 
     $services = $config->services();
 
@@ -19,8 +18,12 @@ return static function (ContainerConfigurator $config): void
         ->autoconfigure();
 
     $services->load('App\\', '../src/*')
-        ->exclude('../src/{DependencyInjection,Entity,Tests,Kernel.php}');
+        ->exclude('../src/{DependencyInjection,Entity,Kernel.php}');
 
     $services->set(UserHashPasswordListener::class)
-        ->tag('doctrine.orm.entity_listener', ['lazy' => true]);
+        ->tag('doctrine.orm.entity_listener', [
+            'event' => Events::prePersist,
+            'entity' => User::class,
+            'lazy' => true,
+        ]);
 };

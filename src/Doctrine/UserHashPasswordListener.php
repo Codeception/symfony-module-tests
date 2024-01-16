@@ -9,11 +9,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class UserHashPasswordListener
 {
-    private UserPasswordHasherInterface $hasher;
-
-    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
+    public function __construct(private UserPasswordHasherInterface $hasher)
     {
-        $this->hasher = $userPasswordHasher;
     }
 
     public function prePersist(User $user): void

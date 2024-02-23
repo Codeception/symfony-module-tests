@@ -18,9 +18,9 @@ final class UserRepository extends ServiceEntityRepository implements UserReposi
 
     public function save(User $user): void
     {
-        $this->_em->persist($user);
-        $this->_em->flush();
-        $this->_em->clear();
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
     }
 
     public function getByEmail(string $email): ?User

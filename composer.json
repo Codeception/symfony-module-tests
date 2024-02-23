@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "RC",
     "require": {
-        "php": ">=8.0.2",
+        "php": ">=8.1.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^2.5",
@@ -34,7 +34,7 @@
         "codeception/codeception": "^5.0.0-RC3",
         "codeception/lib-innerbrowser": "^3.1",
         "codeception/module-asserts": "^3.0",
-        "codeception/module-doctrine2": "^3.0",
+        "codeception/module-doctrine": "^3.1",
         "codeception/module-phpbrowser": "^3.0",
         "codeception/module-symfony": "^3.0 | *@dev",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
@@ -57,7 +57,7 @@
         },
         "sort-packages": true,
         "platform": {
-            "php": "8.0.2"
+            "php": "8.1.0"
         },
         "allow-plugins": {
             "symfony/flex": true,
@@ -70,9 +70,6 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/_build/support"
-        ],
         "psr-4": {
             "App\\Tests\\": "tests/"
         }

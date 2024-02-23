@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional;
 
 use App\Event\UserRegisteredEvent;
-use App\Tests\FunctionalTester;
+use App\Tests\Support\FunctionalTester;
 use PHPUnit\Framework\ExpectationFailedException;
 use Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector;
 use Symfony\Component\Console\ConsoleEvents;

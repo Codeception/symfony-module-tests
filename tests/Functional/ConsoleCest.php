@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional;
 
 use App\Command\ExampleCommand;
-use App\Tests\FunctionalTester;
+use App\Tests\Support\FunctionalTester;
 
 final class ConsoleCest
 {

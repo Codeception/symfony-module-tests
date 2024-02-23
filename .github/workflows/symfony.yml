@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - '5.4_codecept5'
+      - '5.4'
   pull_request:
     branches:
-      - '5.4_codecept5'
+      - '5.4'
 
 env:
   APP_ENV: test
@@ -18,10 +18,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php-versions: ['8.0', '8.1', '8.2', '8.3']
+        php-versions: ['8.1', '8.2', '8.3']
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup PHP with extensions and Composer v2
         uses: shivammathur/setup-php@v2
@@ -40,7 +40,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Cache composer dependencies
-        uses: actions/cache@v2.1.7
+        uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-${{ matrix.php-versions }}-composer-${{ hashFiles('composer.json') }}
@@ -50,10 +50,10 @@ jobs:
         run: composer install --no-progress
 
       - name: Update database schema
-        run: php bin/console d:s:u -f
+        run: php bin/console doctrine:schema:update --force
 
       - name: Load Doctrine fixtures
-        run: php bin/console d:f:l -q
+        run: php bin/console doctrine:fixtures:load --quiet
 
       - name: Run functional tests
         run: vendor/bin/codecept run Functional

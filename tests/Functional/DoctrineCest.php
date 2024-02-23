@@ -7,7 +7,7 @@ namespace App\Tests\Functional;
 use App\Entity\User;
 use App\Repository\Model\UserRepositoryInterface;
 use App\Repository\UserRepository;
-use App\Tests\FunctionalTester;
+use App\Tests\Support\FunctionalTester;
 
 final class DoctrineCest
 {

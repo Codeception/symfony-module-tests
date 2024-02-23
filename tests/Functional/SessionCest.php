@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional;
 
 use App\Entity\User;
-use App\Tests\FunctionalTester;
+use App\Tests\Support\FunctionalTester;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 final class SessionCest

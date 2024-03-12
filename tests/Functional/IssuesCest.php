@@ -32,4 +32,14 @@ final class IssuesCest
         $user = $dbalConnection->fetchOne('SELECT id FROM user WHERE email = :email', ['email' => 'fixture@fixture.test']);
         $I->assertNotFalse($user);
     }
+
+   /**
+     * @see https://github.com/Codeception/module-symfony/pull/185
+     */
+    public function ensureFragmentsAreIgnored(FunctionalTester $I)
+    {
+        $I->amOnPage('/register#content');
+        $I->seeInCurrentRoute('app_register');
+        $I->seeCurrentRouteIs('app_register');
+    }
 }

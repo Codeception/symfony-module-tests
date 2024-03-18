@@ -33,7 +33,7 @@ final class IssuesCest
         $I->assertNotFalse($user);
     }
 
-   /**
+    /**
      * @see https://github.com/Codeception/module-symfony/pull/185
      */
     public function ensureFragmentsAreIgnored(FunctionalTester $I)
@@ -41,5 +41,16 @@ final class IssuesCest
         $I->amOnPage('/register#content');
         $I->seeInCurrentRoute('app_register');
         $I->seeCurrentRouteIs('app_register');
+    }
+
+    /**
+     * @see https://github.com/Codeception/module-symfony/pull/185
+     */
+    public function runSymfonyConsoleCommandIgnoresSpecificOptions(FunctionalTester $I)
+    {
+        $output = $I->runSymfonyConsoleCommand('doctrine:fixtures:load', ['-q']);
+        $I->assertIsEmpty($output);
+        $numRecords = $I->grabNumRecords(User::class);
+        $I->assertSame(1, $numRecords);
     }
 }

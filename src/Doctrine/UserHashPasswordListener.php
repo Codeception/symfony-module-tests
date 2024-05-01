@@ -21,7 +21,8 @@ final readonly class UserHashPasswordListener
 
         $user->setPassword(
             $this->hasher->hashPassword(
-                $user, $user->getPassword()
+                $user,
+                $user->getPassword()
             )
         );
     }

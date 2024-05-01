@@ -84,7 +84,7 @@ final class EventsCest
         $I->stopFollowingRedirects();
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'jane_doe@gmail.com',
-            '[plainPassword]' => '123456',
+            '[password]' => '123456',
             '[agreeTerms]' => true,
         ]);
         $I->seeOrphanEvent(UserRegisteredEvent::class);
@@ -96,7 +96,7 @@ final class EventsCest
         $I->stopFollowingRedirects();
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'jane_doe@gmail.com',
-            '[plainPassword]' => '123456',
+            '[password]' => '123456',
             '[agreeTerms]' => true,
         ]);
         $I->seeEvent(UserRegisteredEvent::class);

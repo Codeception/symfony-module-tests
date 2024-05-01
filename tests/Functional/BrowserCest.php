@@ -29,7 +29,7 @@ final class BrowserCest
         $I->amOnPage('/register');
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'jane_doe@gmail.com',
-            '[plainPassword]' => '123456',
+            '[password]' => '123456',
             '[agreeTerms]' => true
         ]);
         $I->seeInRepository(User::class, [

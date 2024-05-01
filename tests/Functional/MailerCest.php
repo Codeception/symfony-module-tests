@@ -14,7 +14,7 @@ final class MailerCest
         $I->stopFollowingRedirects();
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'john_doe@gmail.com',
-            '[plainPassword]' => '123456',
+            '[password]' => '123456',
             '[agreeTerms]' => true
         ]);
         //There is already an account with this email
@@ -27,7 +27,7 @@ final class MailerCest
         $I->stopFollowingRedirects();
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'jane_doe@gmail.com',
-            '[plainPassword]' => '123456',
+            '[password]' => '123456',
             '[agreeTerms]' => true
         ]);
         $email = $I->grabLastSentEmail();
@@ -41,7 +41,7 @@ final class MailerCest
         $I->stopFollowingRedirects();
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'jane_doe@gmail.com',
-            '[plainPassword]' => '123456',
+            '[password]' => '123456',
             '[agreeTerms]' => true
         ]);
         $emails = $I->grabSentEmails();
@@ -55,7 +55,7 @@ final class MailerCest
         $I->stopFollowingRedirects();
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'jane_doe@gmail.com',
-            '[plainPassword]' => '123456',
+            '[password]' => '123456',
             '[agreeTerms]' => true
         ]);
         $I->seeEmailIsSent();

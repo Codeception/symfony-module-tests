@@ -30,9 +30,6 @@ final class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $plainPassword = $form->get('plainPassword')->getData();
-            $user->setPassword($plainPassword);
-
             $this->userRepository->save($user);
 
             $this->mailer->sendConfirmationEmail($user);

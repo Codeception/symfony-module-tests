@@ -13,7 +13,7 @@ final class FormCest
         $I->amOnPage('/register');
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'jane_doe@gmail.com',
-            '[plainPassword]' => '123456',
+            '[password]' => '123456',
             '[agreeTerms]' => true
         ]);
         $I->dontSeeFormErrors();
@@ -24,7 +24,7 @@ final class FormCest
         $I->amOnPage('/register');
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'john_doe@gmail.com',
-            '[plainPassword]' => '123456',
+            '[password]' => '123456',
             '[agreeTerms]' => true
         ]);
         $I->seeFormErrorMessage('email');
@@ -36,19 +36,19 @@ final class FormCest
         $I->amOnPage('/register');
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'john_doe@gmail.com',
-            '[plainPassword]' => '123',
+            '[password]' => '123',
             '[agreeTerms]' => true
         ]);
 
         // Only with the names of the fields
-        $I->seeFormErrorMessages(['email', 'plainPassword']);
+        $I->seeFormErrorMessages(['email', 'password']);
 
         // With field names and error messages
         $I->seeFormErrorMessages([
             // Full Message
             'email' => 'There is already an account with this email',
             // Part of a message
-            'plainPassword' => 'at least 6 characters'
+            'password' => 'at least 6 characters'
         ]);
     }
 
@@ -57,10 +57,10 @@ final class FormCest
         $I->amOnPage('/register');
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'john_doe@gmail.com',
-            '[plainPassword]' => '123456',
+            '[password]' => '123456',
             '[agreeTerms]' => true
         ]);
-        //There is already an account with this email
+        // There is already an account with this email
         $I->seeFormHasErrors();
     }
 }

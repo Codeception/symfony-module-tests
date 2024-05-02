@@ -7,6 +7,7 @@ namespace App\Tests\Functional;
 use App\Entity\User;
 use App\Tests\Support\FunctionalTester;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Http\Authenticator\Token\PostAuthenticationToken;
 
 final class SessionCest
 {
@@ -16,6 +17,21 @@ final class SessionCest
             'email' => 'john_doe@gmail.com'
         ]);
         $I->amLoggedInAs($user);
+        $I->amOnPage('/dashboard');
+        $I->seeAuthentication();
+        /** @var TokenStorageInterface $tokenStorage */
+        $tokenStorage = $I->grabService('security.token_storage');
+        $I->assertNotNull($tokenStorage->getToken());
+        $I->see('You are in the Dashboard!');
+    }
+
+    public function amLoggedInWithToken(FunctionalTester $I)
+    {
+        $user = $I->grabEntityFromRepository(User::class, [
+            'email' => 'john_doe@gmail.com'
+        ]);
+        $token = new PostAuthenticationToken($user, 'main', $user->getRoles());
+        $I->amLoggedInWithToken($token);
         $I->amOnPage('/dashboard');
         $I->seeAuthentication();
         /** @var TokenStorageInterface $tokenStorage */

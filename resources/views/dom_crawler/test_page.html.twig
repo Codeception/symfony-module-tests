@@ -1,0 +1,21 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+
+    <label for="exampleCheckbox">Example Checkbox</label>
+    <input type="checkbox" id="exampleCheckbox" name="exampleCheckbox" {% if checked %}checked{% endif %}>
+
+    <label for="exampleInput">Example Input</label>
+    <input type="text" id="exampleInput" name="exampleInput" value="{{ inputValue }}">
+
+    <p class="info">This is a test paragraph with some text.</p>
+
+    <form id="testForm" action="{{ path('app_form_test') }}" method="post">
+        <div>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" value="{{ usernameValue }}">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

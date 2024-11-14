@@ -8,13 +8,25 @@ use App\Tests\Support\FunctionalTester;
 
 final class FormCest
 {
+    public function assertFormValue(FunctionalTester $I)
+    {
+        $I->amOnPage('/test_form');
+        $I->assertFormValue('#testForm', 'username', 'codeceptUser');
+    }
+
+    public function assertNoFormValue(FunctionalTester $I)
+    {
+        $I->amOnPage('/test_form');
+        $I->assertNoFormValue('#testForm', 'nonexistentField');
+    }
+
     public function dontSeeFormErrors(FunctionalTester $I)
     {
         $I->amOnPage('/register');
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'jane_doe@gmail.com',
             '[password]' => '123456',
-            '[agreeTerms]' => true
+            '[agreeTerms]' => true,
         ]);
         $I->dontSeeFormErrors();
     }
@@ -25,7 +37,7 @@ final class FormCest
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'john_doe@gmail.com',
             '[password]' => '123456',
-            '[agreeTerms]' => true
+            '[agreeTerms]' => true,
         ]);
         $I->seeFormErrorMessage('email');
         $I->seeFormErrorMessage('email', 'There is already an account with this email');
@@ -37,7 +49,7 @@ final class FormCest
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'john_doe@gmail.com',
             '[password]' => '123',
-            '[agreeTerms]' => true
+            '[agreeTerms]' => true,
         ]);
 
         // Only with the names of the fields
@@ -48,7 +60,7 @@ final class FormCest
             // Full Message
             'email' => 'There is already an account with this email',
             // Part of a message
-            'password' => 'at least 6 characters'
+            'password' => 'at least 6 characters',
         ]);
     }
 
@@ -58,7 +70,7 @@ final class FormCest
         $I->submitSymfonyForm('registration_form', [
             '[email]' => 'john_doe@gmail.com',
             '[password]' => '123456',
-            '[agreeTerms]' => true
+            '[agreeTerms]' => true,
         ]);
         // There is already an account with this email
         $I->seeFormHasErrors();

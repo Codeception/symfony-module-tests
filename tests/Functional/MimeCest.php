@@ -4,27 +4,19 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
-use App\Entity\User;
 use App\Tests\Support\FunctionalTester;
-use App\Utils\Mailer;
 
 final class MimeCest
 {
     public function _before(FunctionalTester $I)
     {
-        /** @var Mailer $mailer */
-        $mailer = $I->grabService(Mailer::class);
-        $mailer->sendConfirmationEmail(
-            User::create(
-                'jane_doe@gmail.com',
-                '123456'
-            )
-        );
+        $I->amOnPage('/send-email');
+        $I->seeResponseCodeIs(200);
     }
 
     public function assertEmailAddressContains(FunctionalTester $I)
     {
-        $I->assertEmailAddressContains('To', 'jane_doe@gmail.com');
+        $I->assertEmailAddressContains('To', 'jane_doe@example.com');
     }
 
     public function assertEmailAttachmentCount(FunctionalTester $I)
@@ -34,7 +26,7 @@ final class MimeCest
 
     public function assertEmailHasHeader(FunctionalTester $I)
     {
-        $I->assertEmailHasHeader('From');
+        $I->assertEmailHasHeader('To');
     }
 
     public function assertEmailHeaderNotSame(FunctionalTester $I)
@@ -44,7 +36,7 @@ final class MimeCest
 
     public function assertEmailHeaderSame(FunctionalTester $I)
     {
-        $I->assertEmailHeaderSame('To', 'jane_doe@gmail.com');
+        $I->assertEmailHeaderSame('To', 'jane_doe@example.com');
     }
 
     public function assertEmailHtmlBodyContains(FunctionalTester $I)
@@ -54,7 +46,7 @@ final class MimeCest
 
     public function assertEmailHtmlBodyNotContains(FunctionalTester $I)
     {
-        $I->assertEmailHtmlBodyNotContains('jane_doe@gmail.com');
+        $I->assertEmailHtmlBodyNotContains('userpassword');
     }
 
     public function assertEmailNotHasHeader(FunctionalTester $I)
@@ -69,6 +61,6 @@ final class MimeCest
 
     public function assertEmailTextBodyNotContains(FunctionalTester $I)
     {
-        $I->assertEmailTextBodyNotContains('Example Email');
+        $I->assertEmailTextBodyNotContains('My secret text body');
     }
 }

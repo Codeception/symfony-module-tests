@@ -17,6 +17,6 @@ return static function (FrameworkConfig $framework): void {
 
     // Web Profiler
     $framework->profiler([
-        'collect' => false
+        'collect' => false,
     ]);
 };

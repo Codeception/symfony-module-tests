@@ -18,7 +18,7 @@ final readonly class Mailer
     public function sendConfirmationEmail(User $user): TemplatedEmail
     {
         $email = (new TemplatedEmail())
-            ->from('jeison_doe@gmail.com')
+            ->from(new Address('jeison_doe@gmail.com', 'No Reply'))
             ->to(new Address($user->getEmail()))
             ->subject('Account created successfully')
             ->attach('Example attachment')

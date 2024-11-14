@@ -16,7 +16,7 @@ return static function (FrameworkConfig $framework): void {
         ->cookieSecure('auto')
         ->cookieSamesite('lax');
     $framework->phpErrors()
-        ->log();
+        ->log(true);
 
     // Mailer
     $framework->mailer()

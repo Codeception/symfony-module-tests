@@ -8,6 +8,14 @@ return static function (FrameworkConfig $framework): void {
     // Cache
     $framework->cache();
 
+    // Csrf
+    $framework->form()
+        ->csrfProtection()
+        ->tokenId('submit');
+
+    $framework->csrfProtection()
+        ->statelessTokenIds(['submit', 'authenticate', 'logout']);
+
     // Framework
     $framework->secret('%env(APP_SECRET)%');
     $framework->handleAllThrowables(true);

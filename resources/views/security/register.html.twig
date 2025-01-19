@@ -1,19 +1,19 @@
 {% extends 'layout.html.twig' %}
 
-{% set page_title = 'Register' %}
+{% set page_title = 'register.title'|trans %}
 
 {% block body %}
     {% for flashError in app.flashes('verify_email_error') %}
         <div role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <h1>{{ 'register.heading'|trans }}</h1>
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.password) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+    {{ form_row(registrationForm.email, { 'label': 'register.email_label'|trans }) }}
+    {{ form_row(registrationForm.password, { 'label': 'register.password_label'|trans }) }}
+    {{ form_row(registrationForm.agreeTerms, { 'label': 'register.agree_terms_label'|trans }) }}
 
-        <button type="submit">Register</button>
+    <button type="submit">{{ 'register.submit_button'|trans }}</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

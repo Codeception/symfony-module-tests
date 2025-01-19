@@ -1,0 +1,12 @@
+<?php
+
+return [
+    'register' => [
+        'title' => 'Register',
+        'heading' => 'Sign Up',
+        'email_label' => 'Email Address',
+        'password_label' => 'Password',
+        'agree_terms_label' => 'I agree to the terms and conditions',
+        'submit_button' => 'Sign Up',
+    ],
+];

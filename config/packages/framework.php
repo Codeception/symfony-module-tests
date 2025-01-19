@@ -29,11 +29,12 @@ return static function (FrameworkConfig $framework): void {
     // Translation
     $framework->defaultLocale('en');
     $framework->translator()
+        ->enabled(true)
         ->defaultPath('%kernel.project_dir%/resources/lang')
-        ->fallbacks('en');
+        ->fallbacks('es');
 
     // Validator
     $framework->validation([
-        'email_validation_mode' => 'html5'
+        'email_validation_mode' => 'html5',
     ]);
 };

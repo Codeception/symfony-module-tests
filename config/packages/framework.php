@@ -15,6 +15,8 @@ return static function (FrameworkConfig $framework): void {
         ->handlerId(null)
         ->cookieSecure('auto')
         ->cookieSamesite('lax');
+    $framework->handleAllThrowables(true);
+
     $framework->phpErrors()
         ->log(true);
 

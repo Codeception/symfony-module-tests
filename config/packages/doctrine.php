@@ -15,7 +15,10 @@ return static function (DoctrineConfig $doctrine): void {
 
     $doctrineOrm
         ->autoGenerateProxyClasses(true)
-        ->enableLazyGhostObjects(true);
+        ->enableLazyGhostObjects(true)
+        ->controllerResolver()
+        ->autoMapping(false);
+
     $defaultEm
         ->autoMapping(true)
         ->namingStrategy('doctrine.orm.naming_strategy.underscore_number_aware')

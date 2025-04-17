@@ -6,6 +6,7 @@ namespace App\Tests\Functional;
 
 use App\Entity\User;
 use App\Tests\Support\FunctionalTester;
+use Codeception\Util\HttpCode;
 use Doctrine\DBAL\Connection;
 
 final class IssuesCest
@@ -19,7 +20,7 @@ final class IssuesCest
             User::class,
             [
                 'email' => 'fixture@fixture.test',
-                'password' => uniqid(),
+                'password' => uniqid(more_entropy: true),
             ]
         );
         $ormConnection = $I->grabService('doctrine.orm.default_entity_manager')->getConnection();
@@ -52,5 +53,23 @@ final class IssuesCest
         $I->assertIsEmpty($output);
         $numRecords = $I->grabNumRecords(User::class);
         $I->assertSame(1, $numRecords);
+    }
+
+    /**
+     * @see https://github.com/Codeception/module-symfony/pull/209
+     */
+    public function resetFormatsAfterRequest(FunctionalTester $I)
+    {
+        $I->amApiAuthenticated();
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->haveHttpHeader('Accept', 'application/json');
+        $I->sendPost('/api/books');
+        $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
+        $I->seeHttpHeader('Content-Type', 'application/problem+json; charset=utf-8');
+
+        $I->amApiAuthenticated(); // This would fail because of overwrite of format mimetypes
+        $I->sendPost('/api/books', ['name' => 'test']);
+        $I->seeResponseCodeIs(HttpCode::CREATED);
+        $I->seeHttpHeader('Content-Type', 'application/json; charset=utf-8');
     }
 }

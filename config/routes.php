@@ -88,4 +88,7 @@ return static function (RoutingConfigurator $routes): void {
     $routes->add('send_email', '/send-email')
         ->controller(App\Controller\SendEmailController::class)
         ->methods(['GET']);
+
+    $routes->add('api_login', '/api/login')
+        ->methods(['POST']);
 };

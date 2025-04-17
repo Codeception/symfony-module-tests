@@ -9,3 +9,5 @@ modules:
         - Doctrine:
               depends: Symfony
               cleanup: true
+        - REST:
+              depends: Symfony

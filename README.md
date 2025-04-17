@@ -24,11 +24,13 @@ Lastly, if you just want to see the module in action and run the tests yourself 
    ```shell
    composer update
    ```
-3. Update database schema and load Doctrine fixtures
+3. Update database schema, load Doctrine fixtures and generate JWT keypair
    ```shell
    php bin/console doctrine:schema:update --force
    
    php bin/console doctrine:fixtures:load --quiet
+   
+   php bin/console lexik:jwt:generate-keypair
    ```
 
 Then, go to the project directory and run:

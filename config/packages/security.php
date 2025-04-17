@@ -19,6 +19,18 @@ return static function (SecurityConfig $security): void {
         ->pattern('^/(_(profiler|wdt)|css|images|js)/')
         ->security(false);
 
+    $apiFirewall = $security->firewall('api');
+    $apiFirewall
+        ->pattern('^/api')
+        ->stateless(true)
+        ->provider('app_user_provider')
+        ->jwt();
+    $apiFirewall->jsonLogin([
+        'check_path' => '/api/login',
+        'success_handler' => 'lexik_jwt_authentication.handler.authentication_success',
+        'failure_handler' => 'lexik_jwt_authentication.handler.authentication_failure',
+    ]);
+
     $mainFirewall = $security->firewall('main');
     $mainFirewall
         ->lazy(true)
@@ -27,7 +39,7 @@ return static function (SecurityConfig $security): void {
     $mainFirewall->logout(['path' => 'app_logout']);
     $mainFirewall->rememberMe(['secret' => '%env(APP_SECRET)%']);
 
-    $security->accessControl([
-        'path' => '^/dashboard', 'roles' => 'ROLE_USER'
-    ]);
+    $security->accessControl(['path' => '^/api/login', 'roles' => 'PUBLIC_ACCESS']);
+    $security->accessControl(['path' => '^/api', 'roles' => 'IS_AUTHENTICATED_FULLY']);
+    $security->accessControl(['path' => '^/dashboard', 'roles' => 'ROLE_USER']);
 };

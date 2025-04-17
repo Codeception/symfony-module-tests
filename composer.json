@@ -14,7 +14,9 @@
         "php": ">=8.2.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "api-platform/symfony": "^4.0",
         "doctrine/doctrine-bundle": "^2.11",
+        "lexik/jwt-authentication-bundle": "^3.1",
         "symfony/apache-pack": "^1.0",
         "symfony/console": "6.4.*",
         "symfony/dotenv": "6.4.*",
@@ -34,6 +36,7 @@
         "codeception/module-asserts": "^3.2",
         "codeception/module-doctrine": "^3.1",
         "codeception/module-phpbrowser": "^3.0",
+        "codeception/module-rest": "^3.4",
         "codeception/module-symfony": "^3.2 | *@dev",
         "doctrine/doctrine-fixtures-bundle": "^3.5",
         "friendsofphp/php-cs-fixer": "^3.46",
@@ -102,7 +105,8 @@
         ],
         "post-create-project-cmd": [
             "@php bin/console doctrine:schema:update --force",
-            "@php bin/console doctrine:fixtures:load --quiet"
+            "@php bin/console doctrine:fixtures:load --quiet",
+            "@php bin/console lexik:jwt:generate-keypair"
         ]
     },
     "conflict": {

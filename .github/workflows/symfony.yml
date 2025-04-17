@@ -55,5 +55,8 @@ jobs:
       - name: Load Doctrine fixtures
         run: php bin/console doctrine:fixtures:load --quiet
 
+      - name: Generate JWT keypair
+        run: php bin/console lexik:jwt:generate-keypair
+
       - name: Run functional tests
         run: vendor/bin/codecept run Functional

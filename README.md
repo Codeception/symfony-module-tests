@@ -30,7 +30,7 @@ Lastly, if you just want to see the module in action and run the tests yourself 
    
    php bin/console doctrine:fixtures:load --quiet
    
-   php bin/console lexik:jwt:generate-keypair
+   php bin/console lexik:jwt:generate-keypair --skip-if-exists
    ```
 
 Then, go to the project directory and run:

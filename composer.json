@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "RC",
     "require": {
-        "php": ">=8.1.0",
+        "php": ">=8.2.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^2.11",
@@ -30,8 +30,8 @@
         "symfony/yaml": "6.4.*"
     },
     "require-dev": {
-        "codeception/codeception": "^5.0.8",
-        "codeception/module-asserts": "^3.0",
+        "codeception/codeception": "^5.3.0",
+        "codeception/module-asserts": "^3.2",
         "codeception/module-doctrine": "^3.1",
         "codeception/module-phpbrowser": "^3.0",
         "codeception/module-symfony": "^3.2 | *@dev",
@@ -61,7 +61,7 @@
         },
         "sort-packages": true,
         "platform": {
-            "php": "8.1.0"
+            "php": "8.2.0"
         }
     },
     "autoload": {

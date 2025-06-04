@@ -80,25 +80,13 @@ final class EventsCest
 
     public function seeOrphanEvent(FunctionalTester $I)
     {
-        $I->amOnPage('/register');
-        $I->stopFollowingRedirects();
-        $I->submitSymfonyForm('registration_form', [
-            '[email]' => 'jane_doe@gmail.com',
-            '[password]' => '123456',
-            '[agreeTerms]' => true,
-        ]);
+        $I->registerUser('jane_doe@gmail.com', '123456', followRedirects: false);
         $I->seeOrphanEvent(UserRegisteredEvent::class);
     }
 
     public function seeEvent(FunctionalTester $I)
     {
-        $I->amOnPage('/register');
-        $I->stopFollowingRedirects();
-        $I->submitSymfonyForm('registration_form', [
-            '[email]' => 'jane_doe@gmail.com',
-            '[password]' => '123456',
-            '[agreeTerms]' => true,
-        ]);
+        $I->registerUser('jane_doe@gmail.com', '123456', followRedirects: false);
         $I->seeEvent(UserRegisteredEvent::class);
         $I->seeEvent(KernelEvents::REQUEST, KernelEvents::FINISH_REQUEST);
         try {

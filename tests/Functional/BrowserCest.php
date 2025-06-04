@@ -135,12 +135,7 @@ final class BrowserCest
 
     public function submitSymfonyForm(FunctionalTester $I)
     {
-        $I->amOnPage('/register');
-        $I->submitSymfonyForm('registration_form', [
-            '[email]' => 'jane_doe@gmail.com',
-            '[password]' => '123456',
-            '[agreeTerms]' => true,
-        ]);
+        $I->registerUser('jane_doe@gmail.com', '123456', followRedirects: true);
         $I->seeInRepository(User::class, [
             'email' => 'jane_doe@gmail.com',
         ]);

@@ -28,6 +28,6 @@ return static function (SecurityConfig $security): void {
     $mainFirewall->rememberMe(['secret' => '%env(APP_SECRET)%']);
 
     $security->accessControl([
-        'path' => '^/dashboard', 'roles' => 'ROLE_USER'
+        'path' => '^/dashboard', 'roles' => 'ROLE_USER',
     ]);
 };

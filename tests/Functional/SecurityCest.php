@@ -21,7 +21,7 @@ final class SecurityCest
         $I->submitForm('form[name=login]', [
             'email' => 'john_doe@gmail.com',
             'password' => '123456',
-            '_remember_me' => false
+            '_remember_me' => false,
         ]);
         $I->dontSeeRememberedAuthentication();
     }
@@ -29,7 +29,7 @@ final class SecurityCest
     public function seeAuthentication(FunctionalTester $I)
     {
         $user = $I->grabEntityFromRepository(User::class, [
-            'email' => 'john_doe@gmail.com'
+            'email' => 'john_doe@gmail.com',
         ]);
         $I->amLoggedInAs($user);
         $I->amOnPage('/dashboard');
@@ -43,7 +43,7 @@ final class SecurityCest
         $I->submitForm('form[name=login]', [
             'email' => 'john_doe@gmail.com',
             'password' => '123456',
-            '_remember_me' => true
+            '_remember_me' => true,
         ]);
         $I->seeRememberedAuthentication();
     }
@@ -51,7 +51,7 @@ final class SecurityCest
     public function seeUserHasRole(FunctionalTester $I)
     {
         $user = $I->grabEntityFromRepository(User::class, [
-            'email' => 'john_doe@gmail.com'
+            'email' => 'john_doe@gmail.com',
         ]);
         $I->amLoggedInAs($user);
         $I->amOnPage('/');
@@ -62,7 +62,7 @@ final class SecurityCest
     public function seeUserHasRoles(FunctionalTester $I)
     {
         $user = $I->grabEntityFromRepository(User::class, [
-            'email' => 'john_doe@gmail.com'
+            'email' => 'john_doe@gmail.com',
         ]);
         $I->amLoggedInAs($user);
         $I->amOnPage('/');
@@ -73,7 +73,7 @@ final class SecurityCest
     public function seeUserPasswordDoesNotNeedRehash(FunctionalTester $I)
     {
         $user = $I->grabEntityFromRepository(User::class, [
-            'email' => 'john_doe@gmail.com'
+            'email' => 'john_doe@gmail.com',
         ]);
         $I->amLoggedInAs($user);
         $I->amOnPage('/dashboard');

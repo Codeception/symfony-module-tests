@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 use Symfony\Config\MonologConfig;
 
-return static function (MonologConfig $monolog): void
-{
+return static function (MonologConfig $monolog): void {
     $monolog->handler('main', [
         'type' => 'fingers_crossed',
         'action_level' => 'error',
@@ -14,6 +13,6 @@ return static function (MonologConfig $monolog): void
     $monolog->handler('nested', [
         'type' => 'stream',
         'path' => '%kernel.logs_dir%/%kernel.environment%.log',
-        'level' => 'debug'
+        'level' => 'debug',
     ]);
 };

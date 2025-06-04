@@ -14,5 +14,4 @@ final class ServicesCest
         $security = $I->grabService('security.helper');
         $I->assertInstanceOf(Security::class, $security);
     }
-
 }

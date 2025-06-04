@@ -7,8 +7,7 @@ use App\Security\SecurityAuthenticator;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Config\SecurityConfig;
 
-return static function (SecurityConfig $security): void
-{
+return static function (SecurityConfig $security): void {
     $security->enableAuthenticatorManager(true);
     $security->passwordHasher(PasswordAuthenticatedUserInterface::class, 'auto');
     $userProvider = $security->provider('app_user_provider');
@@ -32,6 +31,6 @@ return static function (SecurityConfig $security): void
     $mainFirewall->entryPoint('form_login');
 
     $security->accessControl([
-        'path' => '^/dashboard', 'roles' => 'ROLE_USER'
+        'path' => '^/dashboard', 'roles' => 'ROLE_USER',
     ]);
 };

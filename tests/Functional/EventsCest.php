@@ -93,6 +93,7 @@ final class EventsCest
             $I->seeEvent('non-existent-event');
         } catch (ExpectationFailedException $ex) {
             $I->assertTrue(true, 'seeEvent assertion fails with non-existent events.');
+
             return;
         }
         $I->fail('seeEvent assertion did not fail as expected');

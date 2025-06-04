@@ -27,6 +27,7 @@ final class UserRepository extends ServiceEntityRepository implements UserReposi
     {
         /** @var User|null $user */
         $user = $this->findOneBy(['email' => $email]);
+
         return $user;
     }
 }

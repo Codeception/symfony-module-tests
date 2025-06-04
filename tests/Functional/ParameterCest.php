@@ -10,7 +10,7 @@ final class ParameterCest
 {
     public function grabParameter(FunctionalTester $I)
     {
-        $locale = (string) $I->grabParameter('app.business_name');
-        $I->assertSame('Codeception', $locale);
+        $businessName = (string) $I->grabParameter('app.business_name');
+        $I->assertSame('Codeception', $businessName);
     }
 }

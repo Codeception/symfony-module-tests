@@ -22,35 +22,20 @@ final class FormCest
 
     public function dontSeeFormErrors(FunctionalTester $I)
     {
-        $I->amOnPage('/register');
-        $I->submitSymfonyForm('registration_form', [
-            '[email]' => 'jane_doe@gmail.com',
-            '[password]' => '123456',
-            '[agreeTerms]' => true,
-        ]);
+        $I->registerUser('jane_doe@gmail.com', '123456', followRedirects: true);
         $I->dontSeeFormErrors();
     }
 
     public function seeFormErrorMessage(FunctionalTester $I)
     {
-        $I->amOnPage('/register');
-        $I->submitSymfonyForm('registration_form', [
-            '[email]' => 'john_doe@gmail.com',
-            '[password]' => '123456',
-            '[agreeTerms]' => true,
-        ]);
+        $I->registerUser('john_doe@gmail.com', '123456', followRedirects: true);
         $I->seeFormErrorMessage('email');
         $I->seeFormErrorMessage('email', 'There is already an account with this email');
     }
 
     public function seeFormErrorMessages(FunctionalTester $I)
     {
-        $I->amOnPage('/register');
-        $I->submitSymfonyForm('registration_form', [
-            '[email]' => 'john_doe@gmail.com',
-            '[password]' => '123',
-            '[agreeTerms]' => true,
-        ]);
+        $I->registerUser('john_doe@gmail.com', '123', followRedirects: true);
 
         // Only with the names of the fields
         $I->seeFormErrorMessages(['email', 'password']);
@@ -66,12 +51,7 @@ final class FormCest
 
     public function seeFormHasErrors(FunctionalTester $I)
     {
-        $I->amOnPage('/register');
-        $I->submitSymfonyForm('registration_form', [
-            '[email]' => 'john_doe@gmail.com',
-            '[password]' => '123456',
-            '[agreeTerms]' => true,
-        ]);
+        $I->registerUser('john_doe@gmail.com', '123456', followRedirects: true);
         // There is already an account with this email
         $I->seeFormHasErrors();
     }

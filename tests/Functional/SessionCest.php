@@ -14,7 +14,7 @@ final class SessionCest
     public function amLoggedInAs(FunctionalTester $I)
     {
         $user = $I->grabEntityFromRepository(User::class, [
-            'email' => 'john_doe@gmail.com'
+            'email' => 'john_doe@gmail.com',
         ]);
         $I->amLoggedInAs($user);
         $I->amOnPage('/dashboard');
@@ -28,7 +28,7 @@ final class SessionCest
     public function amLoggedInWithToken(FunctionalTester $I)
     {
         $user = $I->grabEntityFromRepository(User::class, [
-            'email' => 'john_doe@gmail.com'
+            'email' => 'john_doe@gmail.com',
         ]);
         $token = new PostAuthenticationToken($user, 'main', $user->getRoles());
         $I->amLoggedInWithToken($token);
@@ -49,7 +49,7 @@ final class SessionCest
     public function goToLogoutPath(FunctionalTester $I)
     {
         $user = $I->grabEntityFromRepository(User::class, [
-            'email' => 'john_doe@gmail.com'
+            'email' => 'john_doe@gmail.com',
         ]);
         $I->amLoggedInAs($user);
         $I->amOnPage('/dashboard');
@@ -63,7 +63,7 @@ final class SessionCest
     public function logoutProgrammatically(FunctionalTester $I)
     {
         $user = $I->grabEntityFromRepository(User::class, [
-            'email' => 'john_doe@gmail.com'
+            'email' => 'john_doe@gmail.com',
         ]);
         $I->amLoggedInAs($user);
         $I->amOnPage('/dashboard');
@@ -78,7 +78,7 @@ final class SessionCest
     public function seeInSession(FunctionalTester $I)
     {
         $user = $I->grabEntityFromRepository(User::class, [
-            'email' => 'john_doe@gmail.com'
+            'email' => 'john_doe@gmail.com',
         ]);
         $I->amLoggedInAs($user);
         $I->amOnPage('/');
@@ -89,7 +89,7 @@ final class SessionCest
     public function seeSessionHasValues(FunctionalTester $I)
     {
         $user = $I->grabEntityFromRepository(User::class, [
-            'email' => 'john_doe@gmail.com'
+            'email' => 'john_doe@gmail.com',
         ]);
         $I->amLoggedInAs($user);
         $I->amOnPage('/');

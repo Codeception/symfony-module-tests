@@ -12,11 +12,8 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class HttpClientController extends AbstractController
 {
-    private HttpClientInterface $httpClient;
-
-    public function __construct(HttpClientInterface $httpClient)
+    public function __construct(private readonly HttpClientInterface $httpClient)
     {
-        $this->httpClient = $httpClient;
     }
 
     public function routeUsingHttpClient(): Response
@@ -65,9 +62,7 @@ final class HttpClientController extends AbstractController
 
     public function internalEndpointPost(Request $request): Response
     {
-        $data = json_decode($request->getContent(), true);
-
-        return $this->json(['received' => $data]);
+        return $this->json(['received' => $request->toArray()]);
     }
 
     public function routeShouldNotMakeSpecificRequest(): Response

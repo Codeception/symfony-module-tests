@@ -37,5 +37,4 @@ final class RouterCest
         $I->amOnPage('/');
         $I->seeInCurrentRoute('index');
     }
-
 }

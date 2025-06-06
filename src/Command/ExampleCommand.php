@@ -32,13 +32,10 @@ final class ExampleCommand extends Command
         );
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output): void
-    {
-        $this->ioStream = new SymfonyStyle($input, $output);
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->ioStream = new SymfonyStyle($input, $output);
+
         $optionSomething = $input->getOption(self::OPTION_SOMETHING);
         if ($optionSomething) {
             $this->ioStream->text('Bye world!');

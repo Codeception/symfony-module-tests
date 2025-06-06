@@ -19,7 +19,7 @@ final class RegistrationController extends AbstractController
     public function __construct(
         private readonly Mailer $mailer,
         private readonly UserRepositoryInterface $userRepository,
-        private readonly EventDispatcherInterface $eventDispatcher
+        private readonly EventDispatcherInterface $eventDispatcher,
     ) {
     }
 

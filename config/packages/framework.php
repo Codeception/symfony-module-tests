@@ -30,6 +30,10 @@ return static function (FrameworkConfig $framework): void {
     $framework->mailer()
         ->dsn('%env(MAILER_DSN)%');
 
+    // PropertyInfo
+    $framework->propertyInfo()
+        ->withConstructorExtractor(true);
+
     // Routing
     $framework->router()
         ->utf8(true);

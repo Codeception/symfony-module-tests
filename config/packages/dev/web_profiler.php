@@ -6,6 +6,6 @@ use Symfony\Config\WebProfilerConfig;
 
 return static function (WebProfilerConfig $webProfiler): void {
     $webProfiler
-        ->toolbar(true)
-        ->interceptRedirects(false);
+        ->interceptRedirects(false)
+        ->toolbar(['enabled' => true]);
 };

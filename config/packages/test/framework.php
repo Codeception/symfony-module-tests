@@ -18,5 +18,6 @@ return static function (FrameworkConfig $framework): void {
     // Web Profiler
     $framework->profiler([
         'collect' => false,
+        'collect_serializer_data' => true,
     ]);
 };

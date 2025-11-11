@@ -22,6 +22,7 @@
         "symfony/framework-bundle": "7.3.*",
         "symfony/http-client": "7.3.*",
         "symfony/mailer": "7.3.*",
+        "symfony/notifier": "7.3.*",
         "symfony/runtime": "7.3.*",
         "symfony/security-bundle": "7.3.*",
         "symfony/translation": "7.3.*",

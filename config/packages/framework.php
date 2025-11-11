@@ -30,6 +30,10 @@ return static function (FrameworkConfig $framework): void {
     $framework->mailer()
         ->dsn('%env(MAILER_DSN)%');
 
+    // Notifier
+    $framework->notifier()
+        ->chatterTransport('slack', '%env(NOTIFIER_DSN)%');
+
     // PropertyInfo
     $framework->propertyInfo()
         ->withConstructorExtractor(true);

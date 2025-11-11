@@ -9,6 +9,7 @@ use App\Event\UserRegisteredEvent;
 use App\Form\RegistrationFormType;
 use App\Repository\Model\UserRepositoryInterface;
 use App\Utils\Mailer;
+use App\Utils\Notifier;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +19,7 @@ final class RegistrationController extends AbstractController
 {
     public function __construct(
         private readonly Mailer $mailer,
+        private readonly Notifier $notifier,
         private readonly UserRepositoryInterface $userRepository,
         private readonly EventDispatcherInterface $eventDispatcher,
     ) {
@@ -33,6 +35,8 @@ final class RegistrationController extends AbstractController
             $this->userRepository->save($user);
 
             $this->mailer->sendConfirmationEmail($user);
+
+            $this->notifier->sendConfirmationNotification($user);
 
             $this->eventDispatcher->dispatch(new UserRegisteredEvent());
 

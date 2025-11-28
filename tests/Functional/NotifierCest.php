@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Tests\Functional;
 
 use App\Tests\Support\FunctionalTester;
-use PHPUnit\Framework\Error\Warning;
+use PHPUnit\Framework\AssertionFailedError;
 
 final class NotifierCest
 {
     public function assertNotificationSubjectContains(FunctionalTester $I)
     {
         $I->registerUser('jane_doe@gmail.com', '123456', followRedirects: false);
-        $I->expectThrowable(Warning::class, function () {
+        $I->expectThrowable(AssertionFailedError::class, function () use ($I) {
             $notification = $I->getNotifierMessage();
             $I->assertNotificationSubjectContains($notification, 'created!');
         });
@@ -21,7 +21,7 @@ final class NotifierCest
     public function assertNotificationSubjectNotContains(FunctionalTester $I)
     {
         $I->registerUser('jane_doe@gmail.com', '123456', followRedirects: false);
-        $I->expectThrowable(Warning::class, function () {
+        $I->expectThrowable(AssertionFailedError::class, function () use ($I) {
             $notification = $I->getNotifierMessage();
             $I->assertNotificationSubjectNotContains($notification, 'Account not created!');
         });
@@ -30,7 +30,7 @@ final class NotifierCest
     public function assertNotificationTransportIsEqual(FunctionalTester $I)
     {
         $I->registerUser('jane_doe@gmail.com', '123456', followRedirects: false);
-        $I->expectThrowable(Warning::class, function () {
+        $I->expectThrowable(AssertionFailedError::class, function () use ($I) {
             $notification = $I->getNotifierMessage();
             $I->assertNotificationTransportIsEqual($notification);
         });
@@ -39,7 +39,7 @@ final class NotifierCest
     public function assertNotificationTransportIsNotEqual(FunctionalTester $I)
     {
         $I->registerUser('jane_doe@gmail.com', '123456', followRedirects: false);
-        $I->expectThrowable(Warning::class, function () {
+        $I->expectThrowable(AssertionFailedError::class, function () use ($I) {
             $notification = $I->getNotifierMessage();
             $I->assertNotificationTransportIsNotEqual($notification, 'chat');
         });
@@ -48,7 +48,7 @@ final class NotifierCest
     public function dontSeeNotificationIsSent(FunctionalTester $I)
     {
         $I->registerUser('john_doe@gmail.com', '123456', followRedirects: false);
-        $I->expectThrowable(Warning::class, function () {
+        $I->expectThrowable(AssertionFailedError::class, function () use ($I) {
             // There is already an account with this notification
             $I->dontSeeNotificationIsSent();
         });
@@ -57,7 +57,7 @@ final class NotifierCest
     public function grabLastSentNotification(FunctionalTester $I)
     {
         $I->registerUser('jane_doe@gmail.com', '123456', followRedirects: false);
-        $I->expectThrowable(Warning::class, function () {
+        $I->expectThrowable(AssertionFailedError::class, function () use ($I) {
             $notification = $I->grabLastSentNotification();
             $I->assertSame('Account created!', $notification->getSubject());
         });
@@ -66,7 +66,7 @@ final class NotifierCest
     public function grabSentNotifications(FunctionalTester $I)
     {
         $I->registerUser('jane_doe@gmail.com', '123456', followRedirects: false);
-        $I->expectThrowable(Warning::class, function () {
+        $I->expectThrowable(AssertionFailedError::class, function () use ($I) {
             $notifications = $I->grabSentNotifications();
             $subject = $notifications[0]->getSubject();
             $I->assertSame('Account created!', $subject);
@@ -76,7 +76,7 @@ final class NotifierCest
     public function seeNotificationIsSent(FunctionalTester $I)
     {
         $I->registerUser('jane_doe@gmail.com', '123456', followRedirects: false);
-        $I->expectThrowable(Warning::class, function () {
+        $I->expectThrowable(AssertionFailedError::class, function () use ($I) {
             $I->seeNotificationIsSent();
         });
     }

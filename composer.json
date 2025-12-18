@@ -33,7 +33,6 @@
         "codeception/codeception": "^5.3.0",
         "codeception/module-asserts": "^3.2",
         "codeception/module-doctrine": "^3.1",
-        "codeception/module-phpbrowser": "^3.0",
         "codeception/module-symfony": "^3.2 | *@dev",
         "doctrine/doctrine-fixtures-bundle": "^4.1",
         "friendsofphp/php-cs-fixer": "^3.46",

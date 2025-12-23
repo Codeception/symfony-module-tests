@@ -2,19 +2,25 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\DoctrineConfig;
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function (DoctrineConfig $doctrine): void {
-    $doctrineOrm = $doctrine->orm();
-    $defaultEm = $doctrineOrm->entityManager('default');
-
-    $doctrineOrm
-        ->autoGenerateProxyClasses(false)
-        ->proxyDir('%kernel.build_dir%/doctrine/orm/Proxies');
-    $defaultEm->resultCacheDriver()
-        ->type('pool')
-        ->pool('doctrine.result_cache_pool');
-    $defaultEm->resultCacheDriver()
-        ->type('pool')
-        ->pool('doctrine.system_cache_pool');
-};
+return App::config([
+    'doctrine' => [
+        'orm' => [
+            'auto_generate_proxy_classes' => false,
+            'proxy_dir' => '%kernel.build_dir%/doctrine/orm/Proxies',
+            'entity_managers' => [
+                'default' => [
+                    'query_cache_driver' => [
+                        'type' => 'pool',
+                        'pool' => 'doctrine.system_cache_pool',
+                    ],
+                    'result_cache_driver' => [
+                        'type' => 'pool',
+                        'pool' => 'doctrine.system_cache_pool',
+                    ],
+                ],
+            ],
+        ],
+    ],
+]);

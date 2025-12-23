@@ -2,55 +2,76 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\FrameworkConfig;
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function (FrameworkConfig $framework): void {
-    // Cache
-    $framework->cache();
-
-    // Csrf
-    $framework->form()
-        ->csrfProtection()
-        ->tokenId('submit');
-
-    $framework->csrfProtection()
-        ->statelessTokenIds(['submit', 'authenticate', 'logout']);
-
-    // Framework
-    $framework->secret('%env(APP_SECRET)%');
-    $framework->handleAllThrowables(true);
-    $framework->session()
-        ->handlerId(null)
-        ->cookieSecure('auto')
-        ->cookieSamesite('lax');
-    $framework->phpErrors()
-        ->log(true);
-
-    // Mailer
-    $framework->mailer()
-        ->dsn('%env(MAILER_DSN)%');
-
-    // Notifier
-    $framework->notifier()
-        ->chatterTransport('slack', '%env(NOTIFIER_DSN)%');
-
-    // PropertyInfo
-    $framework->propertyInfo()
-        ->withConstructorExtractor(true);
-
-    // Routing
-    $framework->router()
-        ->utf8(true);
-
-    // Translation
-    $framework->defaultLocale('en');
-    $framework->translator()
-        ->enabled(true)
-        ->defaultPath('%kernel.project_dir%/resources/lang')
-        ->fallbacks('es');
-
-    // Validator
-    $framework->validation([
-        'email_validation_mode' => 'html5',
-    ]);
-};
+return App::config([
+    'framework' => [
+        'cache' => [],
+        'csrf_protection' => [
+            'stateless_token_ids' => ['submit', 'authenticate', 'logout'],
+        ],
+        'default_locale' => 'en',
+        'form' => [
+            'csrf_protection' => [
+                'token_id' => 'submit',
+            ],
+        ],
+        'handle_all_throwables' => true,
+        'mailer' => [
+            'dsn' => '%env(MAILER_DSN)%',
+        ],
+        'notifier' => [
+            'chatter_transports' => [
+                'slack' => '%env(NOTIFIER_DSN)%',
+            ],
+        ],
+        'php_errors' => [
+            'log' => true,
+        ],
+        'property_info' => [
+            'with_constructor_extractor' => true,
+        ],
+        'router' => [
+            'utf8' => true,
+        ],
+        'secret' => '%env(APP_SECRET)%',
+        'session' => [
+            'handler_id' => null,
+            'cookie_secure' => 'auto',
+            'cookie_samesite' => 'lax',
+        ],
+        'translator' => [
+            'enabled' => true,
+            'default_path' => '%kernel.project_dir%/resources/lang',
+            'fallbacks' => ['es'],
+        ],
+        'validation' => [
+            'email_validation_mode' => 'html5',
+        ],
+    ],
+    'when@dev' => [
+        'framework' => [
+            'profiler' => [
+                'only_exceptions' => false,
+                'collect_serializer_data' => true,
+            ],
+        ],
+    ],
+    'when@test' => [
+        'framework' => [
+            'profiler' => [
+                'collect' => false,
+                'collect_serializer_data' => true,
+            ],
+            'session' => [
+                'storage_factory_id' => 'session.storage.factory.mock_file',
+            ],
+            'test' => true,
+            'validation' => [
+                'not_compromised_password' => [
+                    'enabled' => true,
+                ],
+            ],
+        ],
+    ],
+]);

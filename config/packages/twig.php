@@ -2,9 +2,18 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\TwigConfig;
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function (TwigConfig $twig): void {
-    $twig->defaultPath('%kernel.project_dir%/resources/views');
-    $twig->global('business_name')->value('%app.business_name%');
-};
+return App::config([
+    'twig' => [
+        'default_path' => '%kernel.project_dir%/resources/views',
+        'globals' => [
+            'business_name' => '%app.business_name%',
+        ],
+    ],
+    'when@test' => [
+        'twig' => [
+            'strict_variables' => true,
+        ],
+    ],
+]);

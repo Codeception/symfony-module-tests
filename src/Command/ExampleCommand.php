@@ -11,9 +11,11 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-#[AsCommand('app:example-command', 'An example command.')]
+#[AsCommand(ExampleCommand::COMMAND_NAME, 'An example command.')]
 final class ExampleCommand extends Command
 {
+    public const COMMAND_NAME = 'app:example-command';
+
     /** @var string */
     private const OPTION_SOMETHING = 'something';
 

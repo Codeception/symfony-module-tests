@@ -2,15 +2,23 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\FrameworkConfig;
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function (FrameworkConfig $framework): void {
-    // Doctrine
-    $framework->cache()
-        ->pool('doctrine.result_cache_pool')->adapters(['cache.app'])
-        ->pool('doctrine.system_cache_pool')->adapters(['cache.system']);
-
-    // Routing
-    $framework->router()
-        ->strictRequirements(null);
-};
+return App::config([
+    'framework' => [
+        // Doctrine
+        'cache' => [
+            'pools' => [
+                'doctrine.result_cache_pool' => [
+                    'adapters' => ['cache.app'],
+                ],
+                'doctrine.system_cache_pool' => [
+                    'adapters' => ['cache.system'],
+                ],
+            ],
+        ],
+        'router' => [
+            'strict_requirements' => null,
+        ],
+    ],
+]);

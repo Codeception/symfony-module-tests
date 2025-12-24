@@ -15,11 +15,6 @@ return App::config([
             ],
         ],
         'orm' => [
-            'auto_generate_proxy_classes' => true,
-            'enable_lazy_ghost_objects' => true,
-            'controller_resolver' => [
-                'auto_mapping' => false,
-            ],
             'entity_managers' => [
                 'default' => [
                     'auto_mapping' => true,

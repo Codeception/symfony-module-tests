@@ -18,17 +18,32 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php-versions: ['8.2', '8.3', '8.4']
+        php-versions: ['8.2', '8.3', '8.4', '8.5']
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup PHP with extensions and Composer v2
+      - name: Setup PHP != 8.5 with extensions and Composer v2
+        if: ${{ matrix.php-versions != '8.5' }}
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
           tools: composer:v2
           extensions: ctype, iconv, intl, json, mbstring, pdo, pdo_sqlite
+        env:
+          update: true
+
+      - name: Setup PHP 8.5 with extensions and Composer v2
+        if: ${{ matrix.php-versions == '8.5' }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          tools: composer:v2
+          extensions: ctype, iconv, intl, json, mbstring, pdo, pdo_sqlite
+          # this ini directive seems to be off by default in PHP 8.5
+          # see https://github.com/php/php-src/issues/20279
+          # enable it because codeception relies on it.
+          ini-values: register_argc_argv=1
         env:
           update: true
 

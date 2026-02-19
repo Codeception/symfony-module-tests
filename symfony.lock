@@ -186,9 +186,6 @@
     "phpspec/prophecy": {
         "version": "1.12.1"
     },
-    "phpstan/phpstan": {
-        "version": "0.12.94"
-    },
     "phpunit/php-code-coverage": {
         "version": "9.2.4"
     },
@@ -244,9 +241,6 @@
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
-    },
-    "rector/rector": {
-        "version": "0.11.48"
     },
     "roave/security-advisories": {
         "version": "dev-latest"
@@ -443,15 +437,6 @@
         "files": [
             "./config/packages/mailer.yaml"
         ]
-    },
-    "symfony/maker-bundle": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
-        }
     },
     "symfony/mime": {
         "version": "v5.1.8"

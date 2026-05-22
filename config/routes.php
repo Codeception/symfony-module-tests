@@ -88,4 +88,8 @@ return static function (RoutingConfigurator $routes): void {
     $routes->add('send_email', '/send-email')
         ->controller(App\Controller\SendEmailController::class)
         ->methods(['GET']);
+
+    $routes->add('send_message', '/send-message')
+        ->controller(App\Controller\SendMessageController::class)
+        ->methods(['GET']);
 };

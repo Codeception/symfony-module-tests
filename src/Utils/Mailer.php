@@ -8,6 +8,9 @@ use App\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Header\Headers;
+use Symfony\Component\Mime\Message;
+use Symfony\Component\Mime\Part\TextPart;
 
 final readonly class Mailer
 {
@@ -29,5 +32,20 @@ final readonly class Mailer
         $this->mailer->send($email);
 
         return $email;
+    }
+
+    public function sendMessage(User $user): Message
+    {
+        $message = new Message(
+            (new Headers())
+                ->addMailboxListHeader('From', [new Address('jeison_doe@gmail.com', 'No Reply')])
+                ->addMailboxListHeader('To', [new Address($user->getEmail())])
+                ->addTextHeader('Subject', 'Text message'),
+            new TextPart('Message body content'),
+        );
+
+        $this->mailer->send($message);
+
+        return $message;
     }
 }

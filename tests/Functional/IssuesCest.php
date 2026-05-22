@@ -7,6 +7,7 @@ namespace App\Tests\Functional;
 use App\Entity\User;
 use App\Tests\Support\FunctionalTester;
 use Doctrine\DBAL\Connection;
+use Symfony\Component\Mime\Message;
 
 final class IssuesCest
 {
@@ -52,5 +53,18 @@ final class IssuesCest
         $I->assertIsEmpty($output);
         $numRecords = $I->grabNumRecords(User::class);
         $I->assertSame(1, $numRecords);
+    }
+
+    /**
+     * @see https://github.com/Codeception/module-symfony/pull/232
+     */
+    public function ensureMessageObjectsCanBeFetched(FunctionalTester $I)
+    {
+        $I->amOnPage('/send-message');
+        $I->seeEmailIsSent(1);
+        $I->assertEmailAddressContains('To', 'jane_doe@example.com');
+        $I->assertEmailHeaderSame('To', 'jane_doe@example.com');
+        $I->assertEmailHeaderSame('Subject', 'Text message');
+        $I->assertInstanceOf(Message::class, $I->grabLastSentEmail());
     }
 }

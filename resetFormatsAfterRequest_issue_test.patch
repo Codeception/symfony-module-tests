@@ -1,4 +1,4 @@
-﻿diff --git a/.env b/.env
+diff --git a/.env b/.env
 index 726c7e5..0d25746 100644
 --- a/.env
 +++ b/.env
@@ -39,7 +39,7 @@ index fab85ac..8bcd6f2 100644
 +/config/jwt/*.pem
 +###< lexik/jwt-authentication-bundle ###
 diff --git a/composer.json b/composer.json
-index 4f28215..9906399 100644
+index 4f28215..56d40f0 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -13,7 +13,9 @@
@@ -52,12 +52,13 @@ index 4f28215..9906399 100644
          "symfony/apache-pack": "^1.0",
          "symfony/console": "7.4.*",
          "symfony/dotenv": "7.4.*",
-@@ -33,5 +35,7 @@
+@@ -33,6 +35,8 @@
          "codeception/codeception": "^5.3",
          "codeception/module-asserts": "^3.2",
          "codeception/module-doctrine": "^3.3",
 +        "codeception/module-phpbrowser": "^4.0",
 +        "codeception/module-rest": "^3.4",
+         "codeception/module-symfony": "^3.8 | *@dev",
          "doctrine/doctrine-fixtures-bundle": "^4.3",
          "friendsofphp/php-cs-fixer": "^3.94",
 @@ -104,7 +108,8 @@
@@ -70,18 +71,6 @@ index 4f28215..9906399 100644
          ]
      },
      "conflict": {
-@@ -112,8 +117,8 @@
-     },
-     "extra": {
-         "symfony": {
--            "allow-contrib": false,
-+            "allow-contrib": "true",
-             "require": "7.4.*"
-         }
-     }
--}
-+}
-\ No newline at end of file
 diff --git a/config/bundles.php b/config/bundles.php
 index d314828..21b1ce9 100644
 --- a/config/bundles.php
@@ -181,12 +170,12 @@ index 0000000..6311e85
 +    $uid->timeBasedUuidVersion(7);
 +};
 diff --git a/config/routes.php b/config/routes.php
-index 0446a1a..3f3b055 100644
+index c168115..7d3d857 100644
 --- a/config/routes.php
 +++ b/config/routes.php
-@@ -88,4 +88,7 @@ return static function (RoutingConfigurator $routes): void {
-     $routes->add('send_email', '/send-email')
-         ->controller(App\Controller\SendEmailController::class)
+@@ -92,4 +92,7 @@ return static function (RoutingConfigurator $routes): void {
+     $routes->add('send_message', '/send-message')
+         ->controller(App\Controller\SendMessageController::class)
          ->methods(['GET']);
 +
 +    $routes->add('api_login', '/api/login')
@@ -299,7 +288,7 @@ index 9867a88..84e73fe 100644
 +        - REST:
 +              depends: Symfony
 diff --git a/tests/Functional/IssuesCest.php b/tests/Functional/IssuesCest.php
-index 88d2eac..c9cbd67 100644
+index ab6b1b2..2663524 100644
 --- a/tests/Functional/IssuesCest.php
 +++ b/tests/Functional/IssuesCest.php
 @@ -6,6 +6,7 @@ namespace App\Tests\Functional;
@@ -308,9 +297,9 @@ index 88d2eac..c9cbd67 100644
  use App\Tests\Support\FunctionalTester;
 +use Codeception\Util\HttpCode;
  use Doctrine\DBAL\Connection;
+ use Symfony\Component\Mime\Message;
  
- final class IssuesCest
-@@ -19,7 +20,7 @@ final class IssuesCest
+@@ -20,7 +21,7 @@ final class IssuesCest
              User::class,
              [
                  'email' => 'fixture@fixture.test',
@@ -319,9 +308,9 @@ index 88d2eac..c9cbd67 100644
              ]
          );
          $ormConnection = $I->grabService('doctrine.orm.default_entity_manager')->getConnection();
-@@ -53,4 +54,22 @@ final class IssuesCest
-         $numRecords = $I->grabNumRecords(User::class);
-         $I->assertSame(1, $numRecords);
+@@ -67,4 +68,22 @@ final class IssuesCest
+         $I->assertEmailHeaderSame('Subject', 'Text message');
+         $I->assertInstanceOf(Message::class, $I->grabLastSentEmail());
      }
 +
 +    /**
@@ -365,3 +354,6 @@ index 3e74da4..f39f916 100644
      public function registerUser(string $email, string $password, bool $followRedirects): void
      {
          $this->amOnPage('/register');
+-- 
+2.52.0.windows.1
+

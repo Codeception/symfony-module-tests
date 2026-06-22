@@ -92,4 +92,12 @@ return static function (RoutingConfigurator $routes): void {
     $routes->add('send_message', '/send-message')
         ->controller(App\Controller\SendMessageController::class)
         ->methods(['GET']);
+
+    $routes->add('app_create_user', '/create-user')
+        ->controller(App\Controller\CreateUserController::class)
+        ->methods(['GET']);
+
+    $routes->add('app_create_user_with_confirmation', '/create-user-with-confirmation')
+        ->controller(App\Controller\CreateUserWithConfirmationController::class)
+        ->methods(['GET']);
 };

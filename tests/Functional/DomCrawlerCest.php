@@ -13,6 +13,21 @@ final class DomCrawlerCest
         $I->amOnPage('/test_page');
     }
 
+    public function assertAnySelectorTextContains(FunctionalTester $I): void
+    {
+        $I->assertAnySelectorTextContains('label', 'Example Input', 'A label should contain "Example Input".');
+    }
+
+    public function assertAnySelectorTextNotContains(FunctionalTester $I): void
+    {
+        $I->assertAnySelectorTextNotContains('label', 'Nonexistent label text', 'No label should contain this text.');
+    }
+
+    public function assertAnySelectorTextSame(FunctionalTester $I): void
+    {
+        $I->assertAnySelectorTextSame('label', 'Username', 'A label should be exactly "Username".');
+    }
+
     public function assertCheckboxChecked(FunctionalTester $I): void
     {
         $I->assertCheckboxChecked('exampleCheckbox', 'The checkbox should be checked.');
@@ -36,6 +51,11 @@ final class DomCrawlerCest
     public function assertPageTitleSame(FunctionalTester $I): void
     {
         $I->assertPageTitleSame('Test Page', 'The page title should be "Test Page".');
+    }
+
+    public function assertSelectorCount(FunctionalTester $I): void
+    {
+        $I->assertSelectorCount(3, 'input', 'The test page should contain exactly 3 inputs.');
     }
 
     public function assertSelectorExists(FunctionalTester $I): void

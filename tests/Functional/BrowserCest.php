@@ -21,6 +21,26 @@ final class BrowserCest
         $I->assertBrowserHasCookie('TESTCOOKIE');
     }
 
+    public function assertBrowserHistoryIsNotOnFirstPage(FunctionalTester $I)
+    {
+        $I->amOnPage('/');
+        $I->amOnPage('/login');
+        $I->assertBrowserHistoryIsNotOnFirstPage();
+    }
+
+    public function assertBrowserHistoryIsOnFirstPage(FunctionalTester $I)
+    {
+        $I->amOnPage('/');
+        $I->assertBrowserHistoryIsOnFirstPage();
+    }
+
+    public function assertBrowserHistoryIsOnLastPage(FunctionalTester $I)
+    {
+        $I->amOnPage('/');
+        $I->amOnPage('/login');
+        $I->assertBrowserHistoryIsOnLastPage();
+    }
+
     public function assertBrowserNotHasCookie(FunctionalTester $I)
     {
         $I->setCookie('TESTCOOKIE', 'codecept');

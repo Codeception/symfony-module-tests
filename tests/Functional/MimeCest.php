@@ -19,6 +19,11 @@ final class MimeCest
         $I->assertEmailAddressContains('To', 'jane_doe@example.com');
     }
 
+    public function assertEmailAddressNotContains(FunctionalTester $I)
+    {
+        $I->assertEmailAddressNotContains('To', 'john_doe@example.com');
+    }
+
     public function assertEmailAttachmentCount(FunctionalTester $I)
     {
         $I->assertEmailAttachmentCount(1);

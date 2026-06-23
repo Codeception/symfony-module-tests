@@ -5771,12 +5771,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/module-symfony.git",
-                "reference": "6cd215032d717b290a80e45037fe6cac54ec6387"
+                "reference": "7d9317fe13da9e8521558f79b0fa3bd0a5c197da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/module-symfony/zipball/6cd215032d717b290a80e45037fe6cac54ec6387",
-                "reference": "6cd215032d717b290a80e45037fe6cac54ec6387",
+                "url": "https://api.github.com/repos/Codeception/module-symfony/zipball/7d9317fe13da9e8521558f79b0fa3bd0a5c197da",
+                "reference": "7d9317fe13da9e8521558f79b0fa3bd0a5c197da",
                 "shasum": ""
             },
             "require": {
@@ -5869,7 +5869,7 @@
                 "issues": "https://github.com/Codeception/module-symfony/issues",
                 "source": "https://github.com/Codeception/module-symfony/tree/main"
             },
-            "time": "2026-06-22T17:15:57+00:00"
+            "time": "2026-06-23T20:14:24+00:00"
         },
         {
             "name": "codeception/stub",
@@ -6981,16 +6981,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.12.1",
+            "version": "2.12.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "172ef2f4e9824c1e058b7f30be8ae25a02c0f2b7"
+                "reference": "7ec62dc3f44aa218487dbed81a9bf9bc647be55d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/172ef2f4e9824c1e058b7f30be8ae25a02c0f2b7",
-                "reference": "172ef2f4e9824c1e058b7f30be8ae25a02c0f2b7",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/7ec62dc3f44aa218487dbed81a9bf9bc647be55d",
+                "reference": "7ec62dc3f44aa218487dbed81a9bf9bc647be55d",
                 "shasum": ""
             },
             "require": {
@@ -6999,7 +6999,7 @@
                 "psr/http-message": "^1.1 || ^2.0",
                 "ralouphie/getallheaders": "^3.0",
                 "symfony/deprecation-contracts": "^2.5 || ^3.0",
-                "symfony/polyfill-php80": "^1.24"
+                "symfony/polyfill-php80": "^1.25"
             },
             "provide": {
                 "psr/http-factory-implementation": "1.0",
@@ -7080,7 +7080,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.12.1"
+                "source": "https://github.com/guzzle/psr7/tree/2.12.3"
             },
             "funding": [
                 {
@@ -7096,7 +7096,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-18T09:49:37+00:00"
+            "time": "2026-06-23T15:21:08+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -8840,12 +8840,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "55f7461997e52f12c93d307ccdcb0ee8e89f336a"
+                "reference": "23afac1b181cebf9a272d9cb3423c6c39f3710d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/55f7461997e52f12c93d307ccdcb0ee8e89f336a",
-                "reference": "55f7461997e52f12c93d307ccdcb0ee8e89f336a",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/23afac1b181cebf9a272d9cb3423c6c39f3710d9",
+                "reference": "23afac1b181cebf9a272d9cb3423c6c39f3710d9",
                 "shasum": ""
             },
             "conflict": {
@@ -9456,7 +9456,7 @@
                 "paragonie/random_compat": "<2",
                 "paragonie/sodium_compat": "<1.24|>=2,<2.5",
                 "passbolt/passbolt_api": "<4.6.2",
-                "paymenter/paymenter": "<1.2.11",
+                "paymenter/paymenter": "<1.5",
                 "paypal/adaptivepayments-sdk-php": "<=3.9.2",
                 "paypal/invoice-sdk-php": "<=3.9",
                 "paypal/merchant-sdk-php": "<3.12",
@@ -9940,7 +9940,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-22T17:34:25+00:00"
+            "time": "2026-06-22T21:03:44+00:00"
         },
         {
             "name": "sebastian/cli-parser",

@@ -1,0 +1,7 @@
+framework:
+    mailer:
+        message_bus: false
+    messenger:
+        default_bus: messenger.bus.default
+        buses:
+            messenger.bus.default: ~

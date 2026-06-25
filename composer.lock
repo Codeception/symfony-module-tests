@@ -5980,12 +5980,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/module-symfony.git",
-                "reference": "7d9317fe13da9e8521558f79b0fa3bd0a5c197da"
+                "reference": "7f0cd5d5ef89658ed1a56185bf33047477686fc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/module-symfony/zipball/7d9317fe13da9e8521558f79b0fa3bd0a5c197da",
-                "reference": "7d9317fe13da9e8521558f79b0fa3bd0a5c197da",
+                "url": "https://api.github.com/repos/Codeception/module-symfony/zipball/7f0cd5d5ef89658ed1a56185bf33047477686fc5",
+                "reference": "7f0cd5d5ef89658ed1a56185bf33047477686fc5",
                 "shasum": ""
             },
             "require": {
@@ -6019,6 +6019,7 @@
                 "symfony/http-foundation": "^5.4 | ^6.4 | ^7.4 | ^8.0",
                 "symfony/http-kernel": "^5.4 | ^6.4 | ^7.4 | ^8.0",
                 "symfony/mailer": "^5.4 | ^6.4 | ^7.4 | ^8.0",
+                "symfony/messenger": "^5.4 | ^6.4 | ^7.4 | ^8.0",
                 "symfony/mime": "^5.4 | ^6.4 | ^7.4 | ^8.0",
                 "symfony/notifier": "^5.4 | ^6.4 | ^7.4 | ^8.0",
                 "symfony/options-resolver": "^5.4 | ^6.4 | ^7.4 | ^8.0",
@@ -6078,7 +6079,7 @@
                 "issues": "https://github.com/Codeception/module-symfony/issues",
                 "source": "https://github.com/Codeception/module-symfony/tree/main"
             },
-            "time": "2026-06-23T20:14:24+00:00"
+            "time": "2026-06-25T19:43:59+00:00"
         },
         {
             "name": "codeception/stub",

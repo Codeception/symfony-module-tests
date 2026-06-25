@@ -1,0 +1,11 @@
+framework:
+    mailer:
+        # Keep the Mailer synchronous: with Messenger enabled, Symfony otherwise routes
+        # emails through the bus, which would double-count messages in MailerCest.
+        message_bus: false
+    messenger:
+        # A single synchronous bus; messages without explicit routing are handled in-process,
+        # which is what the Messenger assertions verify.
+        default_bus: messenger.bus.default
+        buses:
+            messenger.bus.default: ~

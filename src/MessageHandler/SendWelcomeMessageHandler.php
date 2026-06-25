@@ -12,6 +12,5 @@ final class SendWelcomeMessageHandler
 {
     public function __invoke(SendWelcomeMessage $message): void
     {
-        // No-op: the dispatch itself is what the assertions verify.
     }
 }

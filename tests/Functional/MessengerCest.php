@@ -10,11 +10,11 @@ use stdClass;
 
 final class MessengerCest
 {
-    public function assertMessageCount(FunctionalTester $I): void
+    public function seeDispatchedMessageCount(FunctionalTester $I): void
     {
         $I->amOnPage('/dispatch-message');
-        $I->assertMessageCount(1);
-        $I->assertMessageCount(1, 'messenger.bus.default');
+        $I->seeDispatchedMessageCount(1);
+        $I->seeDispatchedMessageCount(1, 'messenger.bus.default');
     }
 
     public function seeMessageDispatched(FunctionalTester $I): void
@@ -40,7 +40,7 @@ final class MessengerCest
     public function noMessagesDispatched(FunctionalTester $I): void
     {
         $I->amOnPage('/');
-        $I->assertMessageCount(0);
+        $I->seeDispatchedMessageCount(0);
         $I->assertSame([], $I->grabDispatchedMessageClasses());
     }
 }

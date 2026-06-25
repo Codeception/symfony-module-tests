@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e84b3f7c947ef48bc1d9147b70250f71",
+    "content-hash": "0c0be7d834ce65fc3ed081c5bb5ec7a0",
     "packages": [
         {
             "name": "doctrine/dbal",
@@ -2895,6 +2895,97 @@
             "time": "2026-05-19T20:33:22+00:00"
         },
         {
+            "name": "symfony/messenger",
+            "version": "v6.4.39",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/messenger.git",
+                "reference": "c96b8feaeedd0b19a104e08e953e6068a35ce553"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/messenger/zipball/c96b8feaeedd0b19a104e08e953e6068a35ce553",
+                "reference": "c96b8feaeedd0b19a104e08e953e6068a35ce553",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "psr/log": "^1|^2|^3",
+                "symfony/clock": "^6.3|^7.0",
+                "symfony/deprecation-contracts": "^2.5|^3"
+            },
+            "conflict": {
+                "symfony/console": "<6.3",
+                "symfony/event-dispatcher": "<5.4",
+                "symfony/event-dispatcher-contracts": "<2.5",
+                "symfony/framework-bundle": "<5.4",
+                "symfony/http-kernel": "<5.4",
+                "symfony/serializer": "<5.4"
+            },
+            "require-dev": {
+                "psr/cache": "^1.0|^2.0|^3.0",
+                "symfony/console": "^6.3|^7.0",
+                "symfony/dependency-injection": "^5.4|^6.0|^7.0",
+                "symfony/event-dispatcher": "^5.4|^6.0|^7.0",
+                "symfony/http-kernel": "^5.4|^6.0|^7.0",
+                "symfony/process": "^5.4|^6.0|^7.0",
+                "symfony/property-access": "^5.4|^6.0|^7.0",
+                "symfony/rate-limiter": "^5.4|^6.0|^7.0",
+                "symfony/routing": "^5.4|^6.0|^7.0",
+                "symfony/serializer": "^5.4|^6.0|^7.0",
+                "symfony/service-contracts": "^2.5|^3",
+                "symfony/stopwatch": "^5.4|^6.0|^7.0",
+                "symfony/validator": "^5.4|^6.0|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Messenger\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Samuel Roze",
+                    "email": "samuel.roze@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Helps applications send and receive messages to/from other applications or via message queues",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/messenger/tree/v6.4.39"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-05-11T12:57:53+00:00"
+        },
+        {
             "name": "symfony/mime",
             "version": "v6.4.41",
             "source": {
@@ -5767,12 +5858,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/module-symfony.git",
-                "reference": "7d9317fe13da9e8521558f79b0fa3bd0a5c197da"
+                "reference": "7f0cd5d5ef89658ed1a56185bf33047477686fc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/module-symfony/zipball/7d9317fe13da9e8521558f79b0fa3bd0a5c197da",
-                "reference": "7d9317fe13da9e8521558f79b0fa3bd0a5c197da",
+                "url": "https://api.github.com/repos/Codeception/module-symfony/zipball/7f0cd5d5ef89658ed1a56185bf33047477686fc5",
+                "reference": "7f0cd5d5ef89658ed1a56185bf33047477686fc5",
                 "shasum": ""
             },
             "require": {
@@ -5806,6 +5897,7 @@
                 "symfony/http-foundation": "^5.4 | ^6.4 | ^7.4 | ^8.0",
                 "symfony/http-kernel": "^5.4 | ^6.4 | ^7.4 | ^8.0",
                 "symfony/mailer": "^5.4 | ^6.4 | ^7.4 | ^8.0",
+                "symfony/messenger": "^5.4 | ^6.4 | ^7.4 | ^8.0",
                 "symfony/mime": "^5.4 | ^6.4 | ^7.4 | ^8.0",
                 "symfony/notifier": "^5.4 | ^6.4 | ^7.4 | ^8.0",
                 "symfony/options-resolver": "^5.4 | ^6.4 | ^7.4 | ^8.0",
@@ -5865,7 +5957,7 @@
                 "issues": "https://github.com/Codeception/module-symfony/issues",
                 "source": "https://github.com/Codeception/module-symfony/tree/main"
             },
-            "time": "2026-06-23T20:14:24+00:00"
+            "time": "2026-06-25T19:43:59+00:00"
         },
         {
             "name": "codeception/stub",

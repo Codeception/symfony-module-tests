@@ -22,6 +22,7 @@
         "symfony/framework-bundle": "8.0.*",
         "symfony/http-client": "8.0.*",
         "symfony/mailer": "8.0.*",
+        "symfony/messenger": "8.0.*",
         "symfony/notifier": "8.0.*",
         "symfony/runtime": "8.0.*",
         "symfony/security-bundle": "8.0.*",

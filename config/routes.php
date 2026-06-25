@@ -92,4 +92,8 @@ return static function (RoutingConfigurator $routes): void {
     $routes->add('send_message', '/send-message')
         ->controller(App\Controller\SendMessageController::class)
         ->methods(['GET']);
+
+    $routes->add('dispatch_message', '/dispatch-message')
+        ->controller(App\Controller\DispatchMessageController::class)
+        ->methods(['GET']);
 };

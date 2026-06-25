@@ -100,4 +100,8 @@ return static function (RoutingConfigurator $routes): void {
     $routes->add('app_create_user_with_confirmation', '/create-user-with-confirmation')
         ->controller(App\Controller\CreateUserWithConfirmationController::class)
         ->methods(['GET']);
+
+    $routes->add('dispatch_message', '/dispatch-message')
+        ->controller(App\Controller\DispatchMessageController::class)
+        ->methods(['GET']);
 };

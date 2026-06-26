@@ -9,6 +9,7 @@ use App\Doctrine\CurrentUserListener;
 use App\Doctrine\FlushCounterListener;
 use App\Doctrine\RequestStackListener;
 use App\Entity\User;
+use App\Service\ExternalApiStub;
 use App\Tests\Support\FunctionalTester;
 use Doctrine\DBAL\Connection;
 
@@ -117,5 +118,22 @@ final class IssuesCest
         $I->assertIsEmpty($output);
         $numRecords = $I->grabNumRecords(User::class);
         $I->assertSame(1, $numRecords);
+    }
+
+    /**
+     * @see https://github.com/Codeception/module-symfony/issues/130
+     */
+    public function keepConfiguredServiceStateAcrossKernelReboot(FunctionalTester $I)
+    {
+        $I->amOnPage('/external-api');
+        $I->see(ExternalApiStub::REAL_RESPONSE);
+
+        /** @var ExternalApiStub $externalApi */
+        $externalApi = $I->grabService(ExternalApiStub::class);
+        $externalApi->setFakeResponse('Faked API response');
+        $I->persistService(ExternalApiStub::class);
+
+        $I->amOnPage('/external-api');
+        $I->see('Faked API response');
     }
 }

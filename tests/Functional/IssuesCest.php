@@ -9,6 +9,7 @@ use App\Doctrine\CurrentUserListener;
 use App\Doctrine\FlushCounterListener;
 use App\Doctrine\RequestStackListener;
 use App\Entity\User;
+use App\Service\ExternalApiStub;
 use App\Tests\Support\FunctionalTester;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Mime\Message;
@@ -131,5 +132,22 @@ final class IssuesCest
         $I->assertEmailHeaderSame('To', 'jane_doe@example.com');
         $I->assertEmailHeaderSame('Subject', 'Text message');
         $I->assertInstanceOf(Message::class, $I->grabLastSentEmail());
+    }
+
+    /**
+     * @see https://github.com/Codeception/module-symfony/issues/130
+     */
+    public function keepConfiguredServiceStateAcrossKernelReboot(FunctionalTester $I)
+    {
+        $I->amOnPage('/external-api');
+        $I->see(ExternalApiStub::REAL_RESPONSE);
+
+        /** @var ExternalApiStub $externalApi */
+        $externalApi = $I->grabService(ExternalApiStub::class);
+        $externalApi->setFakeResponse('Faked API response');
+        $I->persistService(ExternalApiStub::class);
+
+        $I->amOnPage('/external-api');
+        $I->see('Faked API response');
     }
 }

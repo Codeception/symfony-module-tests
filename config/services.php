@@ -59,4 +59,7 @@ return static function (ContainerConfigurator $config): void {
             'entity' => User::class,
             'lazy' => true,
         ]);
+
+    $services->set(App\Service\ExternalApiStub::class)
+        ->public();
 };

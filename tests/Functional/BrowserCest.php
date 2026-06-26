@@ -6,6 +6,7 @@ namespace App\Tests\Functional;
 
 use App\Entity\User;
 use App\Tests\Support\FunctionalTester;
+use PHPUnit\Framework\ExpectationFailedException;
 
 final class BrowserCest
 {
@@ -26,6 +27,18 @@ final class BrowserCest
         $I->setCookie('TESTCOOKIE', 'codecept');
         $I->resetCookie('TESTCOOKIE');
         $I->assertBrowserNotHasCookie('TESTCOOKIE');
+    }
+
+    public function assertBrowserHistoryIsNotOnLastPageRequiresBrowserKit74(FunctionalTester $I)
+    {
+        $I->amOnPage('/');
+
+        try {
+            $I->assertBrowserHistoryIsNotOnLastPage();
+            $I->fail('assertBrowserHistoryIsNotOnLastPage should fail when symfony/browser-kit < 7.4.');
+        } catch (ExpectationFailedException $e) {
+            $I->assertStringContainsString('requires symfony/browser-kit >= 7.4', $e->getMessage());
+        }
     }
 
     public function assertRequestAttributeValueSame(FunctionalTester $I)

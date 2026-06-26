@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Controller\BrowserController;
 use App\Controller\DashboardController;
 use App\Controller\DomCrawlerController;
+use App\Controller\ExternalApiController;
 use App\Controller\FormController;
 use App\Controller\HomeController;
 use App\Controller\HttpClientController;
@@ -15,6 +16,10 @@ use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 return static function (RoutingConfigurator $routes): void {
     $routes->add('index', '/')
         ->controller(HomeController::class)
+        ->methods(['GET']);
+
+    $routes->add('app_external_api', '/external-api')
+        ->controller(ExternalApiController::class)
         ->methods(['GET']);
 
     $routes->add('app_login', '/login')

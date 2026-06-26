@@ -28,6 +28,14 @@ final class BrowserCest
         $I->assertBrowserHistoryIsNotOnFirstPage();
     }
 
+    public function assertBrowserHistoryIsNotOnLastPage(FunctionalTester $I)
+    {
+        $I->amOnPage('/');
+        $I->amOnPage('/login');
+        $I->moveBack();
+        $I->assertBrowserHistoryIsNotOnLastPage();
+    }
+
     public function assertBrowserHistoryIsOnFirstPage(FunctionalTester $I)
     {
         $I->amOnPage('/');

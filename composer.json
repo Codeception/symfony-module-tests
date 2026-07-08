@@ -3,6 +3,12 @@
     "description": "Codeception Symfony Module tests",
     "type": "project",
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Codeception/Codeception.git"
+        }
+    ],
     "authors": [
         {
             "name": "Gustavo Nieves",
@@ -31,7 +37,7 @@
         "symfony/yaml": "8.1.*"
     },
     "require-dev": {
-        "codeception/codeception": "^5.3",
+        "codeception/codeception": "dev-php_config as 5.3.x-dev",
         "codeception/module-asserts": "^3.2",
         "codeception/module-doctrine": "^3.3",
         "codeception/module-symfony": "^3.8 | *@dev",

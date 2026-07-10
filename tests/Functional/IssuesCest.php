@@ -9,6 +9,7 @@ use App\Doctrine\CurrentUserListener;
 use App\Doctrine\FlushCounterListener;
 use App\Doctrine\RequestStackListener;
 use App\Entity\User;
+use App\Kernel;
 use App\Service\ExternalApiStub;
 use App\Tests\Support\FunctionalTester;
 use Doctrine\DBAL\Connection;
@@ -36,6 +37,21 @@ final class IssuesCest
 
         $user = $dbalConnection->fetchOne('SELECT id FROM user WHERE email = :email', ['email' => 'fixture@fixture.test']);
         $I->assertNotFalse($user);
+    }
+
+    /**
+     * @see https://github.com/Codeception/symfony-module-tests/pull/67
+     */
+    public function restoreDoctrineConnectionsParameterAfterKernelReboot(FunctionalTester $I): void
+    {
+        /** @var Kernel $kernel */
+        $kernel = $I->grabService('kernel');
+        $containerBeforeReboot = $kernel->getContainer();
+        $connections = $containerBeforeReboot->getParameter('doctrine.connections');
+
+        $I->rebootClientKernel();
+
+        $I->assertSame($connections, $containerBeforeReboot->getParameter('doctrine.connections'));
     }
 
     /**

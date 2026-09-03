@@ -43,4 +43,11 @@ final class DoctrineCest
     {
         $I->seeNumRecords(1, User::class);
     }
+
+    public function queryCountAssertions(FunctionalTester $I): void
+    {
+        $I->amOnPage('/run-queries');
+        $I->seeNumQueriesIsLessThan(10);
+        $I->dontSeeDuplicateQueries();
+    }
 }

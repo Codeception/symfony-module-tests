@@ -5,3 +5,7 @@ framework:
         default_bus: messenger.bus.default
         buses:
             messenger.bus.default: ~
+        transports:
+            async: 'in-memory://'
+        routing:
+            App\Message\SendWelcomeMessage: async

@@ -96,4 +96,12 @@ final class SessionCest
 
         $I->seeSessionHasValues(['_security_main', '_security_main']);
     }
+
+    public function assertSessionHasFlashMessage(FunctionalTester $I): void
+    {
+        $I->stopFollowingRedirects();
+        $I->amOnPage('/flash');
+        $I->assertSessionHasFlashMessage('success');
+        $I->assertSessionHasFlashMessage('success', 'Welcome back!');
+    }
 }

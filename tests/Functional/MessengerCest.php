@@ -43,4 +43,17 @@ final class MessengerCest
         $I->seeDispatchedMessageCount(0);
         $I->assertSame([], $I->grabDispatchedMessageClasses());
     }
+
+    public function messengerTransport(FunctionalTester $I): void
+    {
+        $I->amOnPage('/dispatch-message');
+        $I->seeMessengerQueueCount(1, 'async');
+        $I->seeMessengerTransportContains(SendWelcomeMessage::class, 'async');
+
+        $envelope = $I->grabMessengerTransport('async')->getSent()[0];
+        $I->assertInstanceOf(SendWelcomeMessage::class, $envelope->getMessage());
+
+        $I->consumeMessengerMessages('async');
+        $I->assertCount(1, $I->grabMessengerTransport('async')->getAcknowledged());
+    }
 }

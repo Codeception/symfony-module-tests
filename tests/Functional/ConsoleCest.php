@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional;
 
 use App\Command\ExampleCommand;
+use App\Command\ResultCommand;
 use App\Tests\Support\FunctionalTester;
 
 final class ConsoleCest
@@ -28,5 +29,16 @@ final class ConsoleCest
             ['--something' => true]
         );
         $I->assertStringContainsString('Bye world!', $output);
+    }
+
+    public function consoleExecutionResult(FunctionalTester $I): void
+    {
+        $I->assertCommandIsSuccessful($I->runCommand(ResultCommand::COMMAND_NAME));
+        $I->assertCommandFailed($I->runCommand(ResultCommand::COMMAND_NAME, ['--fail' => true]));
+        $I->assertCommandIsInvalid($I->runCommand(ResultCommand::COMMAND_NAME, ['--invalid' => true]));
+
+        $result = $I->runCommand(ResultCommand::COMMAND_NAME, ['--fail' => true]);
+        $I->assertStringContainsString('Something failed.', $result->getErrorOutput());
+        $I->assertCommandResultEquals($result, expectedStatusCode: 1);
     }
 }

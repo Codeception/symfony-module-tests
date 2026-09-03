@@ -6,6 +6,7 @@ namespace App\Tests\Functional;
 
 use App\Message\SendWelcomeMessage;
 use App\Tests\Support\FunctionalTester;
+use PHPUnit\Framework\ExpectationFailedException;
 use stdClass;
 
 final class MessengerCest
@@ -42,5 +43,17 @@ final class MessengerCest
         $I->amOnPage('/');
         $I->seeDispatchedMessageCount(0);
         $I->assertSame([], $I->grabDispatchedMessageClasses());
+    }
+
+    public function messengerTransportRequiresMessenger63(FunctionalTester $I): void
+    {
+        $I->amOnPage('/dispatch-message');
+
+        try {
+            $I->seeMessengerQueueCount(1, 'async');
+            $I->fail('seeMessengerQueueCount should fail when symfony/messenger < 6.3.');
+        } catch (ExpectationFailedException $e) {
+            $I->assertStringContainsString('symfony/messenger >= 6.3', $e->getMessage());
+        }
     }
 }

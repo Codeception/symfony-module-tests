@@ -6,10 +6,13 @@ use App\Controller\BrowserController;
 use App\Controller\DashboardController;
 use App\Controller\DomCrawlerController;
 use App\Controller\ExternalApiController;
+use App\Controller\FlashController;
 use App\Controller\FormController;
+use App\Controller\GreetingController;
 use App\Controller\HomeController;
 use App\Controller\HttpClientController;
 use App\Controller\RegistrationController;
+use App\Controller\RunQueriesController;
 use App\Controller\SecurityController;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
@@ -108,5 +111,17 @@ return static function (RoutingConfigurator $routes): void {
 
     $routes->add('dispatch_message', '/dispatch-message')
         ->controller(App\Controller\DispatchMessageController::class)
+        ->methods(['GET']);
+
+    $routes->add('app_flash', '/flash')
+        ->controller(FlashController::class)
+        ->methods(['GET']);
+
+    $routes->add('app_greeting', '/greeting')
+        ->controller(GreetingController::class)
+        ->methods(['GET']);
+
+    $routes->add('app_run_queries', '/run-queries')
+        ->controller(RunQueriesController::class)
         ->methods(['GET']);
 };

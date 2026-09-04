@@ -8,9 +8,19 @@ use App\Entity\User;
 use App\Repository\Model\UserRepositoryInterface;
 use App\Repository\UserRepository;
 use App\Tests\Support\FunctionalTester;
+use Doctrine\ORM\EntityManagerInterface;
 
 final class DoctrineCest
 {
+    public function grabEntityManager(FunctionalTester $I): void
+    {
+        $em = $I->grabEntityManager();
+
+        $I->assertInstanceOf(EntityManagerInterface::class, $em);
+        $I->assertTrue($em->isOpen());
+        $I->assertSame($em, $I->grabService('doctrine.orm.default_entity_manager'));
+    }
+
     public function grabNumRecords(FunctionalTester $I)
     {
         $numRecords = $I->grabNumRecords(User::class);
@@ -37,6 +47,22 @@ final class DoctrineCest
         // With Repository interfaces
         $repository = $I->grabRepository(UserRepositoryInterface::class);
         $I->assertInstanceOf(UserRepository::class, $repository);
+    }
+
+    public function resetDoctrineManager(FunctionalTester $I): void
+    {
+        $em = $I->grabEntityManager();
+        $user = $em->getRepository(User::class)->findOneBy(['email' => 'john_doe@gmail.com']);
+        $I->assertTrue($em->contains($user));
+
+        $I->resetDoctrineManager();
+        $I->assertFalse($I->grabEntityManager()->contains($user));
+
+        $I->grabEntityManager()->close();
+        $I->resetDoctrineManager();
+
+        $I->assertTrue($I->grabEntityManager()->isOpen());
+        $I->seeNumRecords(1, User::class);
     }
 
     public function seeNumRecords(FunctionalTester $I)

@@ -44,6 +44,11 @@ final class DoctrineCest
         $I->seeNumRecords(1, User::class);
     }
 
+    public function seeDoctrineSchemaIsValid(FunctionalTester $I): void
+    {
+        $I->seeDoctrineSchemaIsValid();
+    }
+
     public function queryCountAssertions(FunctionalTester $I): void
     {
         $I->amOnPage('/run-queries');

@@ -5983,12 +5983,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/module-symfony.git",
-                "reference": "b336cca048f768b6e874cbb5ca33d2af979c5f7a"
+                "reference": "53c37ccd5366a8d028bfb9ef02ce2356b52c7605"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/module-symfony/zipball/b336cca048f768b6e874cbb5ca33d2af979c5f7a",
-                "reference": "b336cca048f768b6e874cbb5ca33d2af979c5f7a",
+                "url": "https://api.github.com/repos/Codeception/module-symfony/zipball/53c37ccd5366a8d028bfb9ef02ce2356b52c7605",
+                "reference": "53c37ccd5366a8d028bfb9ef02ce2356b52c7605",
                 "shasum": ""
             },
             "require": {
@@ -6083,7 +6083,7 @@
                 "issues": "https://github.com/Codeception/module-symfony/issues",
                 "source": "https://github.com/Codeception/module-symfony/tree/main"
             },
-            "time": "2026-09-04T02:06:44+00:00"
+            "time": "2026-09-04T08:27:30+00:00"
         },
         {
             "name": "codeception/stub",

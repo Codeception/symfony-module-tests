@@ -49,6 +49,22 @@ final class DoctrineCest
         $I->assertInstanceOf(UserRepository::class, $repository);
     }
 
+    public function resetDoctrineManager(FunctionalTester $I): void
+    {
+        $em = $I->grabEntityManager();
+        $user = $em->getRepository(User::class)->findOneBy(['email' => 'john_doe@gmail.com']);
+        $I->assertTrue($em->contains($user));
+
+        $I->resetDoctrineManager();
+        $I->assertFalse($I->grabEntityManager()->contains($user));
+
+        $I->grabEntityManager()->close();
+        $I->resetDoctrineManager();
+
+        $I->assertTrue($I->grabEntityManager()->isOpen());
+        $I->seeNumRecords(1, User::class);
+    }
+
     public function seeNumRecords(FunctionalTester $I)
     {
         $I->seeNumRecords(1, User::class);

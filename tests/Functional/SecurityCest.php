@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional;
 
 use App\Entity\User;
+use App\Security\Voter\UserVoter;
 use App\Tests\Support\FunctionalTester;
 
 final class SecurityCest
@@ -68,6 +69,30 @@ final class SecurityCest
         $I->amOnPage('/');
 
         $I->seeUserHasRoles(['ROLE_USER', 'ROLE_CUSTOMER']);
+    }
+
+    public function seeUserIsGranted(FunctionalTester $I): void
+    {
+        $user = $I->grabEntityFromRepository(User::class, [
+            'email' => 'john_doe@gmail.com',
+        ]);
+        $I->amLoggedInAs($user);
+        $I->amOnPage('/');
+
+        $I->seeUserIsGranted('ROLE_CUSTOMER');
+        $I->seeUserIsGranted(UserVoter::EDIT, $user);
+    }
+
+    public function dontSeeUserIsGranted(FunctionalTester $I): void
+    {
+        $user = $I->grabEntityFromRepository(User::class, [
+            'email' => 'john_doe@gmail.com',
+        ]);
+        $I->amLoggedInAs($user);
+        $I->amOnPage('/');
+
+        $I->dontSeeUserIsGranted('ROLE_ADMIN');
+        $I->dontSeeUserIsGranted(UserVoter::EDIT, User::create('jane_doe@gmail.com', '123456'));
     }
 
     public function seeUserPasswordDoesNotNeedRehash(FunctionalTester $I)

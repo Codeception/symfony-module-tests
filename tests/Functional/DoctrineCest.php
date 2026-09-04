@@ -8,9 +8,19 @@ use App\Entity\User;
 use App\Repository\Model\UserRepositoryInterface;
 use App\Repository\UserRepository;
 use App\Tests\Support\FunctionalTester;
+use Doctrine\ORM\EntityManagerInterface;
 
 final class DoctrineCest
 {
+    public function grabEntityManager(FunctionalTester $I): void
+    {
+        $em = $I->grabEntityManager();
+
+        $I->assertInstanceOf(EntityManagerInterface::class, $em);
+        $I->assertTrue($em->isOpen());
+        $I->assertSame($em, $I->grabService('doctrine.orm.default_entity_manager'));
+    }
+
     public function grabNumRecords(FunctionalTester $I)
     {
         $numRecords = $I->grabNumRecords(User::class);

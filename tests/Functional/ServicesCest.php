@@ -6,10 +6,23 @@ namespace App\Tests\Functional;
 
 use App\Service\Greeting;
 use App\Tests\Support\FunctionalTester;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\Security;
 
 final class ServicesCest
 {
+    public function grabContainer(FunctionalTester $I): void
+    {
+        $container = $I->grabContainer();
+
+        $I->assertInstanceOf(ContainerInterface::class, $container);
+        $I->assertSame('test', $container->getParameter('kernel.environment'));
+
+        $I->assertTrue($container->has(EntityManagerInterface::class));
+        $I->assertFalse($I->grabService('kernel')->getContainer()->has(EntityManagerInterface::class));
+    }
+
     public function grabService(FunctionalTester $I)
     {
         $security = $I->grabService('security.helper');
